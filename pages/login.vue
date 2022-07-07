@@ -28,7 +28,7 @@
       <div class="more-sign">
       <h6>社交帐号登录</h6>
         <ul>
-           <li><a id="weixin" class="weixin" href="#"><i class="iconfont icon-weixin"/></a></li>
+           <li><a id="weixin" class="weixin" :href=this.wxurl @click="wxlogin()" ><i class="iconfont icon-weixin"/></a></li>
           <li><a id="qq" class="qq" href="#"><i class="iconfont icon-qq"/></a></li>
         </ul>
       </div>
@@ -47,6 +47,7 @@
     layout: 'sign',
     data () {
       return {
+        wxurl:"http://localhost:8160/educenter/api/ucenter/wx/login",
         user:{
           mobile:'',
           password:''
@@ -65,7 +66,7 @@
                    cookie.set('guli_token',response.data.data.token,{domain: 'localhost'})
                    //console.log('guli_token:'+cookie.get(guli_token))
                   //4.调用接口,根据token获取用户信息
-                  loginApi.getLoginUserInfo() 
+                  loginApi.getLoginUserInfo()
                           .then(response => {
                              this.loginInfo = response.data.data.userInfo
                              //获取返回用户信息，放到cookie里面
@@ -73,7 +74,7 @@
                              //console.log('guli_ucenter:'+cookie.get(guli_ucenter))
                              //跳转页面
                              window.location.href="/"
-                          })                  
+                          })
                 })
       },
        //验证手机号码格式
@@ -82,8 +83,10 @@
           return callback(new Error('手机号码格式不正确'))
         }
         return callback()
+      },
+      wxlogin(){
+        loginApi.wxlogin()
       }
-
     }
   }
 </script>
