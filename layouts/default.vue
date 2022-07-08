@@ -22,9 +22,11 @@
             <router-link to="/article" tag="li" active-class="current">
               <a>资料下载</a>
             </router-link>
-            
+            <router-link to="/usercenter" tag="li" active-class="current">
+              <a>个人中心</a>
+            </router-link>
           </ul>
-         
+
           <!-- / nav -->
           <ul class="h-r-login">
               <li v-if="!loginInfo.id" id="no-login">
@@ -208,8 +210,8 @@ export default {
       }
     },
     //判断是否null
-    isNotNull(data){ 
-    return (data == "" || data == undefined || data == null) ? false: true; 
+    isNotNull(data){
+    return (data == "" || data == undefined || data == null) ? false: true;
     }
   }
 }

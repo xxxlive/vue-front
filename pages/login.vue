@@ -85,7 +85,7 @@
         return callback()
       },
       wxlogin(){
-        loginApi.wxlogin()
+        // loginApi.wxlogin()
       }
     }
   }
