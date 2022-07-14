@@ -1,5 +1,5 @@
 <template>
-  <div id="app"> 
+  <div id="app">
     <template v-if="!isShowMultiple && show">
       <vue-aliplayer-v2
         :source="source"
@@ -20,23 +20,23 @@
               <div>
                 <section id="c-i-tabTitle" class="c-infor-tabTitle c-tab-title">
                   <a name="c-i" class="current" title="课程评论">课程评论</a>
-                  
+
                 </section>
               </div>
             <article class="ml10 mr10 pt20">
-             <!-- 课程评论 --> 
+             <!-- 课程评论 -->
       <div>
         <div v-clickoutside="hideReplyBtn" @click="inputFocus" class="my-reply">
             <el-avatar class="header-img" :size="40" :src="myHeader"></el-avatar>
             <div class="reply-info" >
-                <div 
-                tabindex="0" 
-                contenteditable="true" 
-                id="replyInput" 
-                spellcheck="false" 
-                placeholder="输入评论..." 
-                class="reply-input" 
-                @focus="showReplyBtn"  
+                <div
+                tabindex="0"
+                contenteditable="true"
+                id="replyInput"
+                spellcheck="false"
+                placeholder="输入评论..."
+                class="reply-input"
+                @focus="showReplyBtn"
                 @input="onDivInput($event)"
                 >
                 </div>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="icon-btn">
                         <span @click="showReplyInput(i,reply.nickname,reply.id)"><i class="iconfont el-icon-s-comment"></i>{{reply.commentNum}}</span>
-                        
+
                     </div>
                     <div class="talk-box">
                         <p>
@@ -97,11 +97,11 @@
                             </p>
                         </div>
                         <div class="reply-box">
-                          
+
 
                         </div>
                     </div>
-                      
+
 
                     </div>
                 </div>
@@ -118,13 +118,13 @@
         </div>
     </div>
             <!-- /课程评论 -->
-             
-               
+
+
             </article>
             </div>
           </section>
         </article>
-       
+
         <aside class="fl col-3">
           <div class="i-box">
             <div>
@@ -139,16 +139,16 @@
                         <img :src="courseWebVo.avatar" width="50" height="50" alt>
                       </a>
                     </div>
-                    <section class="hLh30 txtOf"> 
+                    <section class="hLh30 txtOf">
                       <a :href="'../teacher/'+courseWebVo.teacherId" target="_blank" class="c-333 fsize16 fl">{{courseWebVo.teacherName}}</a>
-                      
+
                     </section>
                     <section class="hLh20 txtOf">
                       <span class="c-999">{{courseWebVo.intro}}</span>
                     </section>
                   </li>
                 </ul>
-                
+
               </section>
               <section class="c-infor-tabTitle c-tab-title">
                 <el-button size="medium" type="primary" @click="showPrivateMessInput()">
@@ -158,7 +158,7 @@
             </div>
             </div>
             <div  v-show="privateMess_inputShow" class="my-reply">
-                
+
                 <div>
                     <el-input v-model="privateMess" rows="5" type="textarea" maxlength="500" placeholder="输入想对老师说的话(在500字以内)..."></el-input>
                 </div>
@@ -166,7 +166,7 @@
                     <el-button class="reply-btn" size="medium" @click="sendCommentPrivateMess()" type="primary">发送</el-button>
                 </div>
             </div>
-        
+
             <div>
                <!-- 课程大纲 -->
                 <div class="mt50">
@@ -195,7 +195,7 @@
                                       <el-button size="min" v-if="isNotNull(video.videoSourceUrl)" type="primary" @click="onPlayer(video.videoSourceId,video.videoSourceUrl)"><i class="el-icon-video-play"></i>播放</el-button>
                                       <el-button size="min" v-if="!isNotNull(video.videoSourceUrl)" type="warning"><i class="el-icon-info"></i>未上传视频</el-button>
                                     </span>
-                                  </el-row>  
+                                  </el-row>
                               </li>
                             </ol>
                           </li>
@@ -211,17 +211,17 @@
                   <h6 class="c-i-content c-infor-title">
                   <span>课程资料下载</span>
                   </h6>
-                  <div class="course-txt-body-wrap">    
+                  <div class="course-txt-body-wrap">
                     <br/>
                     <br/>
                     <el-button v-if="isNotNull(courseWebVo.zipData)" type="primary" @click="downloadFile(courseWebVo.zipData)"><i class="el-icon-download"></i>下载课程资料</el-button>
-                    <el-button v-if="!isNotNull(courseWebVo.zipData)" type="warning"><i class="el-icon-info"></i>未上传资料</el-button> 
+                    <el-button v-if="!isNotNull(courseWebVo.zipData)" type="warning"><i class="el-icon-info"></i>未上传资料</el-button>
                   </div>
                 </div>
                 <!-- /资料下载 -->
             </div>
           </aside>
-          
+
         <div class="clear"></div>
       </div>
     </section>
@@ -286,7 +286,7 @@ const clickoutside = {
             rePlay: false, // 循环播
             preload: true,
             controlBarVisibility: 'hover', // 控制条的显示方式：鼠标悬停
-            useH5Prism: true, // 播放器类型：html5 
+            useH5Prism: true, // 播放器类型：html5
             components: []
         },
         source:'',
@@ -301,8 +301,8 @@ const clickoutside = {
          memberId:'',
          nickname:'',
          avatar:'',
-         content:'',  
-         pid:''   
+         content:'',
+         pid:''
         },
             btnShow: false,
             index:'0',
@@ -319,7 +319,7 @@ const clickoutside = {
       };
     },
   created() {
-    
+
     this.getRouteParamsData()
    this.initData(this.chapterVideoList)
    this.showInfo()
@@ -332,7 +332,7 @@ const clickoutside = {
 
         // 获取传过来的对象参数
         this.vid=this.$route.params.vid,
-        this.vUrl=decodeURIComponent(this.$route.params.vUrl),  
+        this.vUrl=decodeURIComponent(this.$route.params.vUrl),
         this.courseWebVo=JSON.parse(decodeURIComponent(this.$route.params.courseWebVo));
         this.chapterVideoList=JSON.parse(decodeURIComponent(this.$route.params.chapterVideoList));
       },
@@ -341,7 +341,7 @@ const clickoutside = {
           const list=[];
           const finalList=[];
           const vlist=dataList;
-          for(var i = 0,len=vlist.length; i < len; i++) { 
+          for(var i = 0,len=vlist.length; i < len; i++) {
             var childrens=vlist[i].children;
             for(var j = 0,len=childrens.length; j < len; j++){
               var splb={
@@ -367,14 +367,14 @@ const clickoutside = {
           args:this.videoListArgs
           };
           this.options.components.push(component);
-          
-          
+          console.log(this.source)
+
      },
      //初始化评论
      initComment(){
           this.myName=this.loginInfo.nickname;
           this.myHeader=this.loginInfo.avatar;
-          this.myId=this.loginInfo.id; 
+          this.myId=this.loginInfo.id;
           commentApi.getCommentInfo(this.courseWebVo.id)
                 .then(response => {
                 this.comments = response.data.data.items
@@ -393,6 +393,7 @@ const clickoutside = {
     //播放视频
     onPlayer(vid,vUrl){
       this.source=vUrl;
+      console.log(this.source)
     },
     //资料下载
     downloadFile(zipData){
@@ -419,12 +420,12 @@ const clickoutside = {
       showMultiple() {
         this.isShowMultiple = !this.isShowMultiple;
       },
-    /** 
-    * 判断是否null 
-    * 
-    */ 
-    isNotNull(data){ 
-    return (data == "" || data == undefined || data == null) ? false: true; 
+    /**
+    * 判断是否null
+    *
+    */
+    isNotNull(data){
+    return (data == "" || data == undefined || data == null) ? false: true;
     },
     ////////////////////////////////////////////评论相关方法
         inputFocus(){
@@ -432,7 +433,7 @@ const clickoutside = {
           replyInput.style.padding= "8px 8px"
           replyInput.style.border ="2px solid blue"
           replyInput.focus()
-        },  
+        },
         showReplyBtn(){
             this.btnShow = true
         },
@@ -449,7 +450,7 @@ const clickoutside = {
             this.toId = id
         },
         _inputShow(i){
-            return this.comments[i].inputShow 
+            return this.comments[i].inputShow
         },
         showPrivateMessInput(){
           this.privateMess_inputShow=!this.privateMess_inputShow
@@ -461,8 +462,8 @@ const clickoutside = {
                     type:'warning',
                     message:'评论不能为空'
                 })
-            }else{ 
-                let input =  document.getElementById('replyInput')           
+            }else{
+                let input =  document.getElementById('replyInput')
                 this.comment.courseId=this.courseWebVo.id
                 this.comment.teacherId=this.courseWebVo.teacherId
                 this.comment.memberId=this.myId
@@ -486,12 +487,12 @@ const clickoutside = {
               this.$message({
                 type: 'success',
                 message: '发送私信成功!'
-                
-              }) 
+
+              })
               this.replyComment = ''
               this.comment={}
               this.privateMess=''
-              this.privateMess_inputShow=false   
+              this.privateMess_inputShow=false
             })
         },
         // 发表评论
@@ -502,7 +503,7 @@ const clickoutside = {
               this.$message({
                 type: 'success',
                 message: '发表评论成功!'
-                
+
               })
               //刷新评论列表
               this.initComment()
@@ -525,7 +526,7 @@ const clickoutside = {
                 this.comment.pid=this.toId
                 //发起后端请求
                 this.saveComment(this.comment)
-                
+
                 //this.comments[i].reply.push(a)
                 this.replyComment = ''
                 this.comment={}
@@ -550,7 +551,7 @@ const clickoutside = {
                 this.comment.isPrivate=1
                 //发起后端请求
                 this.saveCommentPrivateMess(this.comment)
-                
+
             }
         },
         onDivInput: function(e) {
@@ -561,7 +562,7 @@ const clickoutside = {
             var time=new Date().getTime();
             //去掉 js 时间戳后三位，与php 时间戳保持一致
             time=parseInt((time-date)/1000);
-            //存储转换值 
+            //存储转换值
             var s;
             if(time<60*10){//十分钟内
                 return '刚刚';
@@ -569,15 +570,15 @@ const clickoutside = {
                 //超过十分钟少于1小时
                 s = Math.floor(time/60);
                 return  s+"分钟前";
-            }else if((time<60*60*24)&&(time>=60*60)){ 
+            }else if((time<60*60*24)&&(time>=60*60)){
                 //超过1小时少于24小时
                 s = Math.floor(time/60/60);
                 return  s+"小时前";
-            }else if((time<60*60*24*30)&&(time>=60*60*24)){ 
+            }else if((time<60*60*24*30)&&(time>=60*60*24)){
                 //超过1天少于30天内
                 s = Math.floor(time/60/60/24);
                 return s+"天前";
-            }else{ 
+            }else{
                 //超过30天ddd
                 var date= new Date(parseInt(date));
                 return date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate();
@@ -649,7 +650,7 @@ const clickoutside = {
     .header-img
         display inline-block
         vertical-align top
-    .reply-info    
+    .reply-info
         display inline-block
         margin-left 5px
         width 90%
@@ -696,7 +697,7 @@ const clickoutside = {
         width 60%
         height 40px
         line-height 20px
-        >span 
+        >span
             display block
             cursor pointer
             overflow hidden
@@ -710,15 +711,15 @@ const clickoutside = {
             font-size 14px
     .icon-btn
         width 30%
-        padding 0 !important 
+        padding 0 !important
         float right
         @media screen and (max-width : 1200px){
             width 20%
             padding 7px
         }
-        >span 
+        >span
             cursor pointer
-        .iconfont 
+        .iconfont
             margin 0 5px
     .talk-box
         margin 0 50px

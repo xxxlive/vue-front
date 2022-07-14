@@ -1,10 +1,10 @@
 <template>
   <div>
-   
+
 <!-- 幻灯片 开始 -->
 <div v-swiper:mySwiper="swiperOption">
     <div class="swiper-wrapper">
-      
+
         <div class="swiper-slide" v-for="item in bannerList" :key="item.id" style="background: #040B1B;">
             <a target="_blank" :href="item.linkUrl">
                 <img :src="item.imageUrl" :alt="item.title">
@@ -21,9 +21,10 @@
       <div>
         <section class="container">
           <header class="comm-title">
-            <h2 class="tac">
-              <span class="c-333">热门课程</span>
-            </h2>
+            <section class="tal table">
+              <span class="c-333 fsize24 table-cell">Popular Courses</span>
+              <a href="/course" title="全部课程" class="comm-btn c-btn-8 table-cell">All Courses > </a>
+          </section>
           </header>
           <div>
             <article class="comm-course-list">
@@ -39,7 +40,7 @@
                         height="320"
                       >
                       <div class="cc-mask">
-                        <a title="开始学习" class="comm-btn c-btn-1" v-on:click="isLogin(item.id)">开始学习</a>
+                        <a title="开始学习" class="comm-btn c-btn-1" v-on:click="isLogin(item.id)">Start Learning</a>
                       </div>
                     </section>
 
@@ -49,25 +50,23 @@
 
                      <section class="mt10 hLh20 of">
                       <span class="fr jgTag bg-green" v-if="Number(item.price) === 0">
-                        <i class="c-fff fsize12 f-fA">免费</i>
+                        <i class="c-fff fsize12 f-fA">Free</i>
                       </span>
-                       <span class="fr jgTag bg-green" v-else>
+                       <span class="fr jgTag bg-orange" v-else>
                          <i class="c-fff fsize12 f-fA"> ￥{{item.price}}</i>
                        </span>
                       <span class="fl jgAttr c-ccc f-fA">
-                         <i class="c-999 f-fA">{{item.buyCount}} 人学习</i>                               
-                         <i class="c-999 f-fA">{{item.viewCount}} 人浏览</i>
+                         <i class="c-999 f-fA">{{item.buyCount}} Brought</i>
+                         <i class="c-999 f-fA">{{item.viewCount}} Viewed</i>
                       </span>
                     </section>
                   </div>
                 </li>
-        
+
               </ul>
               <div class="clear"></div>
             </article>
-            <section class="tac pt20">
-              <a href="/course" title="全部课程" class="comm-btn c-btn-2">全部课程</a>
-            </section>
+
           </div>
         </section>
       </div>
@@ -76,9 +75,10 @@
       <div>
         <section class="container">
           <header class="comm-title">
-            <h2 class="tac">
-              <span class="c-333">名师大咖</span>
-            </h2>
+            <section class="tal table">
+              <span class="c-333 fsize24 table-cell">Master Lecturer</span>
+              <a href="/teacher" title="全部教师" class="comm-btn c-btn-8 table-cell">All Lecturers > </a>
+            </section>
           </header>
           <div>
             <article class="i-teacher-list">
@@ -106,9 +106,7 @@
               </ul>
               <div class="clear"></div>
             </article>
-            <section class="tac pt20">
-              <a href="/teacher" title="全部教师" class="comm-btn c-btn-2">全部教师</a>
-            </section>
+
           </div>
         </section>
       </div>
@@ -149,8 +147,8 @@ export default {
   },
   methods: {
     //判断是否null
-    isNotNull(data){ 
-    return (data == "" || data == undefined || data == null) ? false: true; 
+    isNotNull(data){
+    return (!(data === "" || data === undefined || data == null));
     },
         //判断是否登录
       isLogin(to){
@@ -171,7 +169,7 @@ export default {
     },
     //查询热门课程和名师
     getIndexData() {
-      index.getIndexData() 
+      index.getIndexData()
            .then(response => {
              this.eduList = response.data.data.eduList
              this.teacherList = response.data.data.teacherList

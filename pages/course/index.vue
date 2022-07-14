@@ -4,19 +4,19 @@
     <section class="container">
       <header class="comm-title">
         <h2 class="fl tac">
-          <span class="c-333">全部课程</span>
+          <span class="c-333">All Courses</span>
         </h2>
       </header>
       <section class="c-sort-box">
         <section class="c-s-dl">
           <dl>
             <dt>
-              <span class="c-999 fsize14">课程类别</span>
+              <span class="c-999 fsize14">CourseType</span>
             </dt>
             <dd class="c-s-dl-li">
               <ul class="clearfix">
                 <li :class="{active:oneIndex==-2}">
-                  <a title="全部" href="#" @click="searchOne(null,-2)">全部</a>
+                  <a title="全部" href="#" @click="searchOne(null,-2)">All</a>
                 </li>
                 <li v-for="(item,index) in subjectNestedList" :key="index" :class="{active:oneIndex==index}">
                   <a :title="item.title" href="#" @click="searchOne(item.id,index)">{{item.title}}</a>
@@ -48,17 +48,17 @@
           <section class="fl">
             <ol class="js-tap clearfix">
               <li :class="{'current bg-orange':buyCountSort!=''}">
-                <a title="销量" href="javascript:void(0);" @click="searchBuyCount()">销量
+                <a title="销量" href="javascript:void(0);" @click="searchBuyCount()">Saled
                 <span :class="{hide:buyCountSort==''}">↓</span>
                 </a>
               </li>
               <li :class="{'current bg-orange':gmtCreateSort!=''}">
-                <a title="最新" href="javascript:void(0);" @click="searchGmtCreate()">最新
+                <a title="最新" href="javascript:void(0);" @click="searchGmtCreate()">Latest
                 <span :class="{hide:gmtCreateSort==''}">↓</span>
                 </a>
               </li>
               <li :class="{'current bg-orange':priceSort!=''}">
-                <a title="价格" href="javascript:void(0);" @click="searchPrice()">价格&nbsp;
+                <a title="价格" href="javascript:void(0);" @click="searchPrice()">Price&nbsp;
                   <span :class="{hide:priceSort==''}">↓</span>
                 </a>
               </li>
@@ -69,7 +69,7 @@
           <!-- /无数据提示 开始-->
           <section class="no-data-wrap" v-if="data.total == 0">
             <em class="icon30 no-data-ico">&nbsp;</em>
-            <span class="c-666 fsize14 ml10 vam">没有相关数据，小编正在努力整理中...</span>
+            <span class="c-666 fsize14 ml10 vam">No such file...</span>
           </section>
 
           <!-- /无数据提示 结束-->
@@ -80,7 +80,7 @@
                   <section class="course-img">
                     <img :src="item.cover" class="img-responsive" :alt="item.title">
                     <div class="cc-mask">
-                      <a :title="item.title" class="comm-btn c-btn-1" v-on:click="isLogin(item.id)">开始学习</a>
+                      <a :title="item.title" class="comm-btn c-btn-1" v-on:click="isLogin(item.id)">Start Learning</a>
                     </div>
                   </section>
                   <h3 class="hLh30 txtOf mt10">
@@ -88,12 +88,14 @@
                   </h3>
                   <section class="mt10 hLh20 of">
                     <span v-if="Number(item.price) === 0" class="fr jgTag bg-green">
-                      <i class="c-fff fsize12 f-fA">免费</i>
+                      <i class="c-fff fsize12 f-fA">Free</i>
+                    </span>
+                    <span v-else class="fr jgTag bg-orange">
+                      <i class="c-fff fsize12 f-fA"> ¥{{item.price}}</i>
                     </span>
                     <span class="fl jgAttr c-ccc f-fA">
-                      <i class="c-999 f-fA">{{item.viewCount}}人学习</i>
-                      |
-                      <i class="c-999 f-fA">9634评论</i>
+                      <i class="c-999 f-fA">{{item.buyCount}} Brought</i>
+                      <i class="c-999 f-fA">{{item.viewCount}} Viewed</i>
                     </span>
                   </section>
                 </div>
@@ -111,7 +113,7 @@
               :class="{undisable: !data.hasPrevious}"
               href="#"
               title="首页"
-              @click.prevent="gotoPage(1)">首</a>
+              @click.prevent="gotoPage(1)">&lt;&lt;</a>
             <a
               :class="{undisable: !data.hasPrevious}"
               href="#"
@@ -133,7 +135,7 @@
               :class="{undisable: !data.hasNext}"
               href="#"
               title="末页"
-              @click.prevent="gotoPage(data.pages)">末</a>
+              @click.prevent="gotoPage(data.pages)">&gt;&gt;</a>
             <div class="clear"/>
           </div>
         </div>
@@ -169,8 +171,8 @@ export default {
   },
   methods: {
     //判断是否null
-    isNotNull(data){ 
-    return (data == "" || data == undefined || data == null) ? false: true; 
+    isNotNull(data){
+    return (data == "" || data == undefined || data == null) ? false: true;
     },
         //判断是否登录
       isLogin(to){
@@ -194,7 +196,7 @@ export default {
       courseApi.getAllSubject()
                .then(response => {
                  console.log(response);
-                 
+
                  this.subjectNestedList = response.data.data.list
                })
     },
@@ -222,7 +224,7 @@ export default {
        this.searchObj = {}
        this.subSubjectList = []
        this.twoIndex = -1
-       
+
       //点击某个一级分类进行条件查询
       this.searchObj.subjectParentId = subjectParentId
       this.gotoPage(1)
