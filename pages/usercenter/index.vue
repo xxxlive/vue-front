@@ -1,28 +1,4 @@
 <template>
-  <div>
-    <div>
-      <el-table
-        :data="tabledata"
-        height="250"
-        border
-        style="width: 100%">
-        <el-table-column
-          prop="id"
-          label="User ID"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="nickname"
-          label="Nickname"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="mobile"
-          label="mobile">
-        </el-table-column>
-      </el-table>
-    </div>
-
 
   <div>
     <el-container style="height: 500px; border: 1px solid #eee">
@@ -117,8 +93,6 @@
         color: #333;
       }
     </style>
-
-  </div>
 
   </div>
 </template>
