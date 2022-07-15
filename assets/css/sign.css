@@ -1,5 +1,7 @@
 body{
-    background-color: #F1F1F1;
+  background-image: url("@/assets/img/bg-login.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 *, :after, :before {
@@ -29,27 +31,30 @@ a{
 }
 
 .sign {
-    height: 100%;
-    min-height: 750px;
-    text-align: center;
-    font-size: 14px;
-    background-color: #f1f1f1;
+  margin-top: 60px;
+  height: 100%;
+  min-height: 750px;
+  text-align: center;
+  font-size: 14px;
+  background: transparent !important;
 }
 
 /*表单样式*/
 .sign .main{
-    background-color: #FFFFFF;
-    width: 400px;
-    padding: 50px;
-    margin: 60px auto 0 auto;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    border-radius: 5px;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255,255,255, 0.66);
+  width: 400px;
+  padding: 50px;
+  margin: auto auto 0;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  border-radius: 5px;
 }
 
 .sign .logo{
-    position: absolute;
-    top: 56px;
-    left: 50px;
+  position: absolute;
+  width: 20%;
+  top: 30px;
+  left: 20px;
 }
 
 
