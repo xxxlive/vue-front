@@ -91,7 +91,7 @@
           </h4>
           <ul class="of flink-list">
             <li>
-              <a href="https://shop141848167.taobao.com/" title="售后服务" target="_blank">售后服务</a>
+              <a href="https://github.com/xxxlive/vue-front" title="售后服务" target="_blank">售后服务</a>
             </li>
           </ul>
           <div class="clear"></div>
@@ -100,15 +100,15 @@
           <section class="fl col-7">
             <section class="mr20">
               <section class="b-f-link">
-                <a href="https://shop141848167.taobao.com/" title="关于我们" target="_blank">关于我们</a>|
-                <a href="https://shop141848167.taobao.com/" title="联系我们" target="_blank">联系我们</a>|
-                <a href="https://shop141848167.taobao.com/" title="帮助中心" target="_blank">帮助中心</a>|
+                <a href="https://github.com/xxxlive/vue-front" title="关于我们" target="_blank">关于我们</a>|
+                <a href="https://github.com/xxxlive/vue-front" title="联系我们" target="_blank">联系我们</a>|
+                <a href="https://github.com/xxxlive/vue-front" title="帮助中心" target="_blank">帮助中心</a>|
                 <a href="/article" title="资源下载" target="_blank">资源下载</a>|
-                <span>Email：985178355@qq.com</span>|
-                <a href="http://localhost:9528" title="后台首页" target="_blank">后台首页</a>
+                <span>Email：1374980762@qq.com</span>|
+                <a href="http://47.95.195.219:9528" title="后台首页" target="_blank">后台首页</a>
               </section>
               <section class="b-f-link mt10">
-                <span>©2021版权所有</span>
+                <span>©2022版权所有</span>
               </section>
             </section>
           </section>
