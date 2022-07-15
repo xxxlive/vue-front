@@ -1,5 +1,5 @@
 <template>
-  <div>
+   <div>
     <el-container style="height: 500px; border: 1px solid #eee">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <el-menu>
@@ -53,47 +53,37 @@
       </el-aside>
 
       <el-container>
-        <el-header style="text-align: right; font-size: 12px">
-          <span>{{tabledata[0].nickname}}</span>
-        </el-header>
+        <div class="centered" style="margin-left:auto; margin-right:auto">
+            <div>Learning Progress</div>
+            <el-divider><i class="el-icon-mobile-phone" style="margin: 0 10px; font-size: 100px; color: green"></i></el-divider>
+            <div>
+              <el-main>
+                <el-progress type="circle" :percentage="0"></el-progress>
+                <el-progress type="circle" :percentage="25"></el-progress>
+                <el-progress type="circle" :percentage="100" status="success"></el-progress>
+                <el-progress type="circle" :percentage="70" status="warning"></el-progress>
+                <el-progress type="circle" :percentage="50" status="exception"></el-progress>
+            </el-main>
+            </div>
 
-        <el-main>
-          <el-table
-            :data="tabledata"
-            height="250"
-            border
-            style="width: 100%">
-            <el-table-column
-              prop="id"
-              label="User ID"
-              width="180">
-            </el-table-column>
-            <el-table-column
-              prop="nickname"
-              label="Nickname"
-              width="180">
-            </el-table-column>
-            <el-table-column
-              prop="mobile"
-              label="mobile">
-            </el-table-column>
-          </el-table>
-        </el-main>
+        </div>
       </el-container>
     </el-container>
+
+
+
   </div>
 </template>
-
 <script>
+
 import courseApi from '@/api/course'
 import loginApi from "@/api/login"
+import ucenterApi from "@/api/ucenter"
 import cookie from 'js-cookie'
 export default {
   data() {
     return {
-      tabledata: [{
-        nickname:"",
-      }],
+      tabledata: [],
       testData:[
         {
           id:"123",
@@ -106,11 +96,12 @@ export default {
   },
   created() {
 
-    // //this.initSubject()
+    //this.initSubject()
     this.isLogin()
-    console.log("before create")
+    console.log("123")
+    //console.log(loginApi.getLoginUserInfo());
     this.initUserData()
-    console.log("ininted!!!")
+    console.log("123")
 
   },
   methods: {
@@ -122,22 +113,22 @@ export default {
     isLogin(){
       if(this.isNotNull(cookie.get('guli_token'))){
         console.log(cookie.get('guli_token'))
+
       }
       else{
         window.location.href="/login"
       }
     },
-    //获取userinfo
+    //获取这个用户选修的课群的比例
     initUserData() {
-      console.log("enter this function!")
-      loginApi.getLoginUserInfo()
-        .then(response => {
-          let data_ = response.data.data.userInfo
-          this.tabledata[0] = data_;
-          this.tabledata = Array.from(this.tabledata)
-          console.log("tabledata is ")
-          console.log(this.tabledata)
-         // console.log(this.testData)
+
+        loginApi.getLoginUserInfo()
+            .then(response => {
+            let id = response.data.data.ID;
+            console.log("拿到用户id了");
+            course_data = ucenterApi.getBroughtCourseRatio(id);
+            console.log(typeof course_data)
+            console.log(course_data)
         })
     },
   }

@@ -220,3 +220,19 @@ export default {
   }
 }
 </script>
+<!-- <style scoped>
+.current_de{
+  display: block;
+  color:black;
+}
+.current_de :hover{
+  background-color: rgb(60, 0, 255);
+}
+.current_de :active{
+  color: black;
+}
+.active {
+  background-color: rgb(0, 42, 255);
+}
+
+</style> -->

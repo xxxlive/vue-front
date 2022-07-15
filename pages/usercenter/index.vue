@@ -5,23 +5,20 @@
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <el-menu>
           <el-submenu index="1">
-            <template slot="title"><i class="el-icon-user"></i>Private Information</template>
+            <template slot="title"><i class="el-icon-user"></i>Private</template>
             <el-menu-item-group>
-              <template slot="title">分组一</template>
+
               <el-menu-item index="1-1">
                 <router-link to="/usercenter/information" exact>
                   <a>information</a>
                 </router-link>
               </el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
+              <el-menu-item index="1-2">
+                <router-link to="/usercenter/learnprogress" exact>
+                  <a>Learning Progress</a>
+                </router-link>
+              </el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-            </el-submenu>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title"><i class="el-icon-menu"></i>导航二</template>
@@ -57,42 +54,13 @@
       </el-aside>
 
       <el-container>
-        <el-header style="text-align: right; font-size: 12px">
-          <el-dropdown>
-            <i class="el-icon-setting" style="margin-right: 15px"></i>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>查看</el-dropdown-item>
-              <el-dropdown-item>新增</el-dropdown-item>
-              <el-dropdown-item>删除</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-          <span>王小虎</span>
-        </el-header>
-
-        <el-main>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="日期" width="140">
-            </el-table-column>
-            <el-table-column prop="name" label="姓名" width="120">
-            </el-table-column>
-            <el-table-column prop="address" label="地址">
-            </el-table-column>
-          </el-table>
-        </el-main>
+        <div class="centered" style="margin-left:auto; margin-right:auto">
+            <img src="@/assets/img/pic/huawei.jpg" width="400px">
+        </div>
       </el-container>
     </el-container>
 
-    <style>
-      .el-header {
-        background-color: #B3C0D1;
-        color: #333;
-        line-height: 60px;
-      }
 
-      .el-aside {
-        color: #333;
-      }
-    </style>
 
   </div>
 </template>
@@ -154,109 +122,12 @@ export default {
           console.log(this.testData)
         })
     },
-    //查询所有的分类
-    initSubject() {
-      courseApi.getAllSubject()
-        .then(response => {
-          console.log(response);
-
-          this.subjectNestedList = response.data.data.list
-        })
-    },
-    //分页切换的方法
-    gotoPage(page) {
-      courseApi.getCourseList(page,8,this.searchObj)
-        .then(response => {
-          this.data = response.data.data
-        })
-    },
-    //根据一级分类id查询二级分类 并查询一级所有的课程
-    searchOne(subjectParentId,index) {
-      if(subjectParentId === null) {
-        this.oneIndex = index
-        this.searchObj.subjectParentId = ''
-        this.searchObj.subjectId = ''
-        this.subSubjectList = []
-        this.buyCountSort = ''
-        this.gmtCreateSort = ''
-        this.priceSort = ''
-        this.gotoPage(1)
-      }else{
-        //把传递index值给oneIndex让样式显示
-        this.oneIndex = index
-        this.searchObj = {}
-        this.subSubjectList = []
-        this.twoIndex = -1
-
-        //点击某个一级分类进行条件查询
-        this.searchObj.subjectParentId = subjectParentId
-        this.gotoPage(1)
-
-        //用传过来的id和所有一级id比较,如果相同显示二级分类
-        for(let i = 0 ; i < this.subjectNestedList.length; i++ ) {
-          //获取每一个一级分类
-          let oneSubject = this.subjectNestedList[i]
-          //比较
-          if(subjectParentId == oneSubject.id) {
-            //根据一级分类id查询二级分类
-            this.subSubjectList = oneSubject.children
-          }
-        }
-      }
-    },
-    //根据二级分类查询课程
-    searchTwo(subjectId,index) {
-      //把传递index值给twoIndex让样式显示
-      this.twoIndex = index
-      //点击某个二级分类进行条件查询
-      this.searchObj.subjectId = subjectId
-      this.gotoPage(1)
-    },
-    //根据销量进行排序
-    searchBuyCount() {
-      //设置值,让样式显示 ''就是不显示
-      this.buyCountSort = 1
-      this.gmtCreateSort = ''
-      this.priceSort = ''
-      //赋值
-      this.searchObj.buyCountSort = this.buyCountSort
-      this.searchObj.gmtCreateSort = this.gmtCreateSort
-      this.searchObj.priceSort = this.priceSort
-      //查询
-      this.gotoPage(1)
-    },
-    //根据最新时间排序
-    searchGmtCreate() {
-//设置值,让样式显示 ''就是不显示
-      this.buyCountSort = ''
-      this.gmtCreateSort = 1
-      this.priceSort = ''
-      //赋值
-      this.searchObj.buyCountSort = this.buyCountSort
-      this.searchObj.gmtCreateSort = this.gmtCreateSort
-      this.searchObj.priceSort = this.priceSort
-      //查询
-      this.gotoPage(1)
-    },
-    //根据价格进行排序
-    searchPrice() {
-      //设置值,让样式显示 ''就是不显示
-      this.buyCountSort = ''
-      this.gmtCreateSort = ''
-      this.priceSort = 1
-      //赋值
-      this.searchObj.buyCountSort = this.buyCountSort
-      this.searchObj.gmtCreateSort = this.gmtCreateSort
-      this.searchObj.priceSort = this.priceSort
-      //查询
-      this.gotoPage(1)
-    }
   }
 };
 </script>
 
 <style scoped>
-.active {
+/* .active {
   background: #bdbdbd;
 }
 .hide {
@@ -265,4 +136,13 @@ export default {
 .show {
   display: block;
 }
+.el-header {
+        background-color: #B3C0D1;
+        color: #333;
+        line-height: 60px;
+      }
+
+      .el-aside {
+        color: #333;
+      } */
 </style>
