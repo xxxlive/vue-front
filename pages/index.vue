@@ -1,10 +1,9 @@
 <template>
   <div>
 
-<!-- 幻灯片 开始 -->
-<div v-swiper:mySwiper="swiperOption">
-    <div class="swiper-wrapper">
-
+    <!-- 幻灯片 开始 -->
+    <div v-swiper:mySwiper="swiperOption">
+      <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="item in bannerList" :key="item.id" style="background: #040B1B;">
             <a target="_blank" :href="item.linkUrl">
                 <img :src="item.imageUrl" :alt="item.title">
@@ -18,6 +17,64 @@
 <!-- 幻灯片 结束 -->
      <div id="aCoursesList">
       <!-- 在线教育网课程 开始 -->
+      <header class="comm-title">
+        <h2 class="tac">
+          <span class="c-333">内容频道</span>
+        </h2>
+      </header>
+        <el-scrollbar height="100%">
+          <el-row :gutter="40" class="centered">
+            <el-col :span="5" :offset="2">
+              <div class="card-content bg-purple-light">
+                <img src="~/assets/img/qq-icon.png" alt="">
+                <h3>在线教育网课程</h3>
+                <p>在线教育网课程</p>
+              </div>
+            </el-col>
+            <el-col :span="5">
+              <div class="card-content bg-purple-light">
+                <img src="~/assets/img/qq-icon.png" alt="">
+                <h3>在线教育网课程</h3>
+                <p>在线教育网课程</p>
+              </div>
+            </el-col>
+            <el-col :span="5">
+              <div class="card-content bg-purple-light">
+                <img src="~/assets/img/qq-icon.png" alt="">
+                <h3>在线教育网课程</h3>
+                <p>在线教育网课程</p>
+              </div>
+            </el-col>
+            <el-col :span="5">
+              <div class="card-content bg-purple-light">
+                <div class="card-content bg-purple-light">
+                  <img src="~/assets/img/qq-icon.png" alt="">
+                  <h3>在线教育网课程</h3>
+                  <p>在线教育网课程</p>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="5">
+              <div class="card-content bg-purple-light">
+                <div class="card-content bg-purple-light">
+                  <img src="~/assets/img/qq-icon.png" alt="">
+                  <h3>在线教育网课程</h3>
+                  <p>在线教育网课程</p>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="5">
+              <div class="card-content bg-purple-light">
+                <div class="card-content bg-purple-light">
+                  <img src="~/assets/img/qq-icon.png" alt="">
+                  <h3>在线教育网课程</h3>
+                  <p>在线教育网课程</p>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </el-scrollbar>
+
       <div>
         <section class="container">
           <header class="comm-title">
@@ -52,12 +109,12 @@
                       <span class="fr jgTag bg-green" v-if="Number(item.price) === 0">
                         <i class="c-fff fsize12 f-fA">Free</i>
                       </span>
-                       <span class="fr jgTag bg-orange" v-else>
-                         <i class="c-fff fsize12 f-fA"> ￥{{item.price}}</i>
+                      <span class="fr jgTag bg-orange" v-else>
+                         <i class="c-fff fsize12 f-fA"> ￥{{ item.price }}</i>
                        </span>
                       <span class="fl jgAttr c-ccc f-fA">
-                         <i class="c-999 f-fA">{{item.buyCount}} Brought</i>
-                         <i class="c-999 f-fA">{{item.viewCount}} Viewed</i>
+                         <i class="c-999 f-fA">{{ item.buyCount }} Brought</i>
+                         <i class="c-999 f-fA">{{ item.viewCount }} Viewed</i>
                       </span>
                     </section>
                   </div>
@@ -66,7 +123,6 @@
               </ul>
               <div class="clear"></div>
             </article>
-
           </div>
         </section>
       </div>
@@ -118,13 +174,14 @@
 import cookie from 'js-cookie'
 import banner from '@/api/banner'
 import index from '@/api/index'
+
 export default {
   data() {
     return {
       swiperOption: {
-        autoplay:true,
-        autoplay:{
-        disableOnInteraction: false
+        autoplay: true,
+        autoplay: {
+          disableOnInteraction: false
         },
         //配置分页
         pagination: {
@@ -163,9 +220,9 @@ export default {
     //查询banner数据
     getBannerList() {
       banner.getListBanner()
-            .then(response => {
-              this.bannerList = response.data.data.list
-            })
+        .then(response => {
+          this.bannerList = response.data.data.list
+        })
     },
     //查询热门课程和名师
     getIndexData() {
