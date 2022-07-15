@@ -4,19 +4,18 @@
     <!-- 幻灯片 开始 -->
     <div v-swiper:mySwiper="swiperOption">
       <div class="swiper-wrapper">
-
         <div class="swiper-slide" v-for="item in bannerList" :key="item.id" style="background: #040B1B;">
-          <a target="_blank" :href="item.linkUrl">
-            <img :src="item.imageUrl" :alt="item.title">
-          </a>
+            <a target="_blank" :href="item.linkUrl">
+                <img :src="item.imageUrl" :alt="item.title">
+           </a>
         </div>
-      </div>
-      <div class="swiper-pagination swiper-pagination-white"></div>
-      <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-      <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
     </div>
-    <!-- 幻灯片 结束 -->
-    <div id="aCoursesList">
+   <div class="swiper-pagination swiper-pagination-white"></div>
+    <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+    <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+</div>
+<!-- 幻灯片 结束 -->
+     <div id="aCoursesList">
       <!-- 在线教育网课程 开始 -->
       <header class="comm-title">
         <h2 class="tac">
@@ -79,9 +78,10 @@
       <div>
         <section class="container">
           <header class="comm-title">
-            <h2 class="tac">
-              <span class="c-333">热门课程</span>
-            </h2>
+            <section class="tal table">
+              <span class="c-333 fsize24 table-cell">Popular Courses</span>
+              <a href="/course" title="全部课程" class="comm-btn c-btn-8 table-cell">All Courses > </a>
+          </section>
           </header>
           <div>
             <article class="comm-course-list">
@@ -89,7 +89,7 @@
                 <li v-for="item in eduList" :key="item.id">
                   <div class="cc-l-wrap">
                     <section class="course-img">
-                      <img
+                       <img
                         :src="item.cover"
                         class="img-responsive"
                         alt="item.title"
@@ -97,25 +97,24 @@
                         height="320"
                       >
                       <div class="cc-mask">
-                        <a title="开始学习" class="comm-btn c-btn-1" v-on:click="isLogin(item.id)">开始学习</a>
+                        <a title="开始学习" class="comm-btn c-btn-1" v-on:click="isLogin(item.id)">Start Learning</a>
                       </div>
                     </section>
 
                     <h3 class="hLh30 txtOf mt10">
-                      <a :title="item.title" class="course-title fsize18 c-333"
-                         v-on:click="isLogin(item.id)">{{ item.title }}</a>
+                      <a :title="item.title" class="course-title fsize18 c-333" v-on:click="isLogin(item.id)">{{item.title}}</a>
                     </h3>
 
-                    <section class="mt10 hLh20 of">
+                     <section class="mt10 hLh20 of">
                       <span class="fr jgTag bg-green" v-if="Number(item.price) === 0">
-                        <i class="c-fff fsize12 f-fA">免费</i>
+                        <i class="c-fff fsize12 f-fA">Free</i>
                       </span>
-                      <span class="fr jgTag bg-green" v-else>
+                      <span class="fr jgTag bg-orange" v-else>
                          <i class="c-fff fsize12 f-fA"> ￥{{ item.price }}</i>
                        </span>
                       <span class="fl jgAttr c-ccc f-fA">
-                         <i class="c-999 f-fA">{{ item.buyCount }} 人学习</i>
-                         <i class="c-999 f-fA">{{ item.viewCount }} 人浏览</i>
+                         <i class="c-999 f-fA">{{ item.buyCount }} Brought</i>
+                         <i class="c-999 f-fA">{{ item.viewCount }} Viewed</i>
                       </span>
                     </section>
                   </div>
@@ -124,20 +123,18 @@
               </ul>
               <div class="clear"></div>
             </article>
-            <section class="tac pt20">
-              <a href="/course" title="全部课程" class="comm-btn c-btn-2">全部课程</a>
-            </section>
           </div>
         </section>
       </div>
       <!-- /在线教育网课程 结束 -->
-      <!-- 在线教育网名师 开始 -->
+    <!-- 在线教育网名师 开始 -->
       <div>
         <section class="container">
           <header class="comm-title">
-            <h2 class="tac">
-              <span class="c-333">名师大咖</span>
-            </h2>
+            <section class="tal table">
+              <span class="c-333 fsize24 table-cell">Master Lecturer</span>
+              <a href="/teacher" title="全部教师" class="comm-btn c-btn-8 table-cell">All Lecturers > </a>
+            </section>
           </header>
           <div>
             <article class="i-teacher-list">
@@ -150,30 +147,27 @@
                       </a>
                     </div>
                     <div class="mt10 hLh30 txtOf tac">
-                      <a :href="'/teacher/'+teacher.id" :title="teacher.name"
-                         class="fsize18 c-666">{{ teacher.name }}</a>
+                      <a :href="'/teacher/'+teacher.id" :title="teacher.name" class="fsize18 c-666">{{teacher.name}}</a>
                     </div>
                     <div class="hLh30 txtOf tac">
-                      <span class="fsize14 c-999">{{ teacher.career }}</span>
+                      <span class="fsize14 c-999">{{teacher.career}}</span>
                     </div>
                     <div class="mt15 i-q-txt">
                       <p
                         class="c-999 f-fA"
-                      >{{ teacher.intro }}</p>
+                      >{{teacher.intro}}</p>
                     </div>
                   </section>
                 </li>
               </ul>
               <div class="clear"></div>
             </article>
-            <section class="tac pt20">
-              <a href="/teacher" title="全部教师" class="comm-btn c-btn-2">全部教师</a>
-            </section>
+
           </div>
         </section>
       </div>
       <!-- /在线教育网名师 结束 -->
-    </div>
+   </div>
   </div>
 </template>
 <script>
@@ -210,16 +204,17 @@ export default {
   },
   methods: {
     //判断是否null
-    isNotNull(data) {
-      return (data == "" || data == undefined || data == null) ? false : true;
+    isNotNull(data){
+    return (!(data === "" || data === undefined || data == null));
     },
-    //判断是否登录
-    isLogin(to) {
-      if (this.isNotNull(cookie.get('guli_token'))) {
+        //判断是否登录
+      isLogin(to){
+      if(this.isNotNull(cookie.get('guli_token'))){
         console.log(cookie.get('guli_token'))
-        window.location.href = "/course/" + to
-      } else {
-        window.location.href = "/login"
+        window.location.href="/course/"+to
+      }
+      else{
+        window.location.href="/login"
       }
     },
     //查询banner数据
@@ -232,10 +227,10 @@ export default {
     //查询热门课程和名师
     getIndexData() {
       index.getIndexData()
-        .then(response => {
-          this.eduList = response.data.data.eduList
-          this.teacherList = response.data.data.teacherList
-        })
+           .then(response => {
+             this.eduList = response.data.data.eduList
+             this.teacherList = response.data.data.teacherList
+           })
     }
   }
 }

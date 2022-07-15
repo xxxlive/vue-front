@@ -1,7 +1,7 @@
 {
   "name": "guli",
   "version": "1.0.0",
-  "description": "谷粒学院前台网站",
+  "description": "在线云学堂前台网站",
   "author": "author",
   "private": true,
   "scripts": {

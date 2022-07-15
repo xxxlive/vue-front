@@ -1,18 +1,13 @@
 <template>
-
   <div>
     <el-container style="height: 500px; border: 1px solid #eee">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu>
+        <el-menu :default-openeds="['1', '3']">
           <el-submenu index="1">
-            <template slot="title"><i class="el-icon-user"></i>Private Information</template>
+            <template slot="title"><i class="el-icon-user"></i>{{tabledata[0].nickname}} Information</template>
             <el-menu-item-group>
               <template slot="title">分组一</template>
-              <el-menu-item index="1-1">
-                <router-link to="/usercenter/information" exact>
-                  <a>information</a>
-                </router-link>
-              </el-menu-item>
+              <el-menu-item index="1-1">选项1</el-menu-item>
               <el-menu-item index="1-2">选项2</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="分组2">
@@ -58,53 +53,46 @@
 
       <el-container>
         <el-header style="text-align: right; font-size: 12px">
-          <el-dropdown>
-            <i class="el-icon-setting" style="margin-right: 15px"></i>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>查看</el-dropdown-item>
-              <el-dropdown-item>新增</el-dropdown-item>
-              <el-dropdown-item>删除</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-          <span>王小虎</span>
+          <span>{{tabledata[0].nickname}}</span>
         </el-header>
 
         <el-main>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="日期" width="140">
+          <el-table
+            :data="tabledata"
+            height="250"
+            border
+            style="width: 100%">
+            <el-table-column
+              prop="id"
+              label="User ID"
+              width="180">
             </el-table-column>
-            <el-table-column prop="name" label="姓名" width="120">
+            <el-table-column
+              prop="nickname"
+              label="Nickname"
+              width="180">
             </el-table-column>
-            <el-table-column prop="address" label="地址">
+            <el-table-column
+              prop="mobile"
+              label="mobile">
             </el-table-column>
           </el-table>
         </el-main>
       </el-container>
     </el-container>
-
-    <style>
-      .el-header {
-        background-color: #B3C0D1;
-        color: #333;
-        line-height: 60px;
-      }
-
-      .el-aside {
-        color: #333;
-      }
-    </style>
-
   </div>
 </template>
-<script>
 
+<script>
 import courseApi from '@/api/course'
 import loginApi from "@/api/login"
 import cookie from 'js-cookie'
 export default {
   data() {
     return {
-      tabledata: [],
+      tabledata: [{
+        nickname:"",
+      }],
       testData:[
         {
           id:"123",
@@ -117,12 +105,11 @@ export default {
   },
   created() {
 
-    //this.initSubject()
+    // //this.initSubject()
     this.isLogin()
-    console.log("123")
-    //console.log(loginApi.getLoginUserInfo());
+    console.log("before create")
     this.initUserData()
-    console.log("123")
+    console.log("ininted!!!")
 
   },
   methods: {
@@ -134,7 +121,6 @@ export default {
     isLogin(){
       if(this.isNotNull(cookie.get('guli_token'))){
         console.log(cookie.get('guli_token'))
-
       }
       else{
         window.location.href="/login"
@@ -143,15 +129,14 @@ export default {
     //获取userinfo
     initUserData() {
       console.log("enter this function!")
-     loginApi.getLoginUserInfo()
+      loginApi.getLoginUserInfo()
         .then(response => {
           let data_ = response.data.data.userInfo
-
           this.tabledata[0] = data_;
           this.tabledata = Array.from(this.tabledata)
           console.log("tabledata is ")
-          console.log(typeof this.tabledata)
-          console.log(this.testData)
+          console.log(this.tabledata)
+         // console.log(this.testData)
         })
     },
     //查询所有的分类

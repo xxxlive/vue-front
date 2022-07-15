@@ -5,25 +5,25 @@
       <section class="container">
         <h1 id="logo">
          <a href="/" title="在线教育学院">
-            <img src="~/assets/img/logo.png" width="100%" alt="在线教育学院">
+            <img src="~/assets/img/logo.jpg" width="100%" alt="在线教育学院">
           </a>
         </h1>
         <div class="h-r-nsl">
           <ul class="nav">
             <router-link to="/" tag="li" active-class="current" exact>
-              <a>首页</a>
+              <a>Homepage</a>
             </router-link>
             <router-link to="/course" tag="li" active-class="current">
-              <a>课程</a>
+              <a>Course</a>
             </router-link>
             <router-link to="/teacher" tag="li" active-class="current">
-              <a>教师</a>
+              <a>Teacher</a>
             </router-link>
             <router-link to="/article" tag="li" active-class="current">
-              <a>资料下载</a>
+              <a>Downloads</a>
             </router-link>
             <router-link to="/usercenter" tag="li" active-class="current">
-              <a>个人中心</a>
+              <a>User Center</a>
             </router-link>
           </ul>
 
@@ -32,11 +32,11 @@
               <li v-if="!loginInfo.id" id="no-login">
                   <a href="/login" title="登录">
                       <em class="icon18 login-icon">&nbsp;</em>
-                      <span class="vam ml5">登录</span>
+                      <span class="vam ml5">login</span>
                   </a>
                   |
                   <a href="/register" title="注册">
-                      <span class="vam ml5">注册</span>
+                      <span class="vam ml5">Register</span>
                   </a>
               </li>
 
@@ -57,7 +57,7 @@
                           >
                       <span id="userName" class="vam disIb">{{ loginInfo.nickname }}</span>
                   </a>
-                <a href="javascript:void(0);" title="退出" @click="logout()" class="ml5">退出</a>
+                <a href="javascript:void(0);" title="退出" @click="logout()" class="ml5">login out</a>
               </li>
               <!-- /未登录显示第1 li；登录后显示第2，3 li -->
           </ul>
@@ -87,11 +87,11 @@
       <section class="container">
         <div class>
           <h4 class="hLh30">
-            <span class="fsize18 f-fM c-999">友情链接</span>
+            <span class="fsize18 f-fM c-999">related link</span>
           </h4>
           <ul class="of flink-list">
             <li>
-              <a href="https://github.com/xxxlive/vue-front" title="售后服务" target="_blank">售后服务</a>
+              <a href="https://github.com/xxxlive/vue-front" title="售后服务" target="_blank">After Sell Service</a>
             </li>
           </ul>
           <div class="clear"></div>
@@ -100,27 +100,31 @@
           <section class="fl col-7">
             <section class="mr20">
               <section class="b-f-link">
-                <a href="https://github.com/xxxlive/vue-front" title="关于我们" target="_blank">关于我们</a>|
-                <a href="https://github.com/xxxlive/vue-front" title="联系我们" target="_blank">联系我们</a>|
-                <a href="https://github.com/xxxlive/vue-front" title="帮助中心" target="_blank">帮助中心</a>|
-                <a href="/article" title="资源下载" target="_blank">资源下载</a>|
+                <a href="https://github.com/xxxlive/vue-front" title="关于我们" target="_blank">About Us</a>|
+                <a href="https://github.com/xxxlive/vue-front" title="联系我们" target="_blank">Contact Us</a>|
+                <a href="https://github.com/xxxlive/vue-front" title="帮助中心" target="_blank">Help Center</a>|
+                <a href="/article" title="资源下载" target="_blank">Article</a>|
                 <span>Email：1374980762@qq.com</span>|
-                <a href="http://47.95.195.219:9528" title="后台首页" target="_blank">后台首页</a>
+                <a href="http://47.95.195.219:9528" title="后台首页" target="_blank">Admin</a>
               </section>
               <section class="b-f-link mt10">
-                <span>©2022版权所有</span>
+                <span>©2022 copyright reserved</span>
               </section>
             </section>
           </section>
           <aside class="fl col-3 tac mt15">
             <section class="gf-tx">
               <span>
-                <img src="~/assets/img/wx-icon.png" alt>
+                <a href="http://www.neu.edu.cn/">
+                  <img src="~/assets/img/wx.png" width="50">
+                </a>
               </span>
             </section>
             <section class="gf-tx">
               <span>
-                <img src="~/assets/img/wb-icon.png" alt>
+                <a href="https://github.com/xxxlive/vue-front">
+                  <img src="~/assets/img/github.png"  width="50">
+                </a>
               </span>
             </section>
           </aside>
