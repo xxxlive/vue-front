@@ -2,7 +2,7 @@
   <div class="guli-player">
     <div class="head">
       <a href="/" title="NEU">
-        <img class="logo" src="~/assets/img/logo.jpg" lt="NEU">
+        <img class="logo" src="~/assets/img/logo.png" lt="NEU">
     </a></div>
     <div class="body">
       <div class="content"><nuxt/></div>
