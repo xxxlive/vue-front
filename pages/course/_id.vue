@@ -42,18 +42,24 @@
               <span class="ml10 vam">
                 <em id="tochange" class="icon18 scIcon"></em>
                 <!-- <em class="icon18 sc_en"></em> -->
-                <a
-                  class="c-fff vam"
-                  title="收藏"
-                  href="#"
-                  @click="starOrUnstar()"
+
+                <template v-if="isStared === false">
+                  <a
+                    class="c-fff vam"
+                    title="收藏"
+                    href="#"
+                    @click="starOrUnstar()"
                   >Add to favorite</a
-                >
-                <template v-if="isStared === true">
-                  <div>yes</div>
+                  >
                 </template>
                 <template v-else>
-                  <div>no</div>
+                  <a
+                    class="c-fff vam"
+                    title="收藏"
+                    href="#"
+                    @click="starOrUnstar()"
+                  >Unstar this course</a
+                  >
                 </template>
               </span>
             </section>

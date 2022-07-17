@@ -56,10 +56,6 @@
       </el-aside>
 
       <el-container>
-        <el-header style="text-align: right; font-size: 12px">
-          <span>{{ tabledata[0].nickname }}</span>
-        </el-header>
-
         <el-main
           style="height:100%">
           <el-table
@@ -68,7 +64,7 @@
             border
             style="width: 100%">
             <el-table-column
-              prop="cover"
+
               label="Course cover"
               width="180">
               <template slot-scope="scope">
@@ -79,7 +75,8 @@
             </span>
               </template>
 
-            </el-table-column>
+            </el-table-column
+>
             <el-table-column
               prop="title"
               label="title"
@@ -171,12 +168,25 @@ export default {
     //取消star这个课程
     unstar(id) {
       console.log(id);
+      //传给后端取消star
       loginApi.getLoginUserInfo().then(response => {
         let memberID = response.data.data.userInfo.id;
         courseApi
           .unstarOneCourse(memberID, id)
           .then(response => {
-              console.log(response)
+              // console.log(response)
+            //成功unstar该课程后应该在界面中删除
+            if(response.data.data.result===true){
+              // console.log("chengongshanchu !!!")
+              let i = 0;
+              // console.log(this.tabledata)
+              for(i=0;i<this.tabledata.length;i++){
+                if(id == this.tabledata[i].id){
+                  this.tabledata = this.tabledata.slice(0,i).concat(this.tabledata.slice(i+1) );
+                  // console.log(this.tabledata)
+                }
+              }
+            }
             }
           );
       }
