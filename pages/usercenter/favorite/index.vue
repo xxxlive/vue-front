@@ -22,7 +22,6 @@
           <el-submenu index="2">
             <template slot="title"><i class="el-icon-menu"></i>Course</template>
             <el-menu-item-group>
-              <template slot="title">分组一</template>
               <el-menu-item index="2-1">
                 <router-link to="/usercenter/favorite" exact>
                   <a>Favorite</a>
@@ -58,7 +57,7 @@
 
       <el-container>
         <el-header style="text-align: right; font-size: 12px">
-          <span>{{tabledata[0].nickname}}</span>
+          <span>{{ tabledata[0].nickname }}</span>
         </el-header>
 
         <el-main>
@@ -68,18 +67,18 @@
             border
             style="width: 100%">
             <el-table-column
-              prop="id"
-              label="User ID"
+              prop="courseId"
+              label="CourseID"
               width="180">
             </el-table-column>
             <el-table-column
-              prop="nickname"
-              label="Nickname"
+              prop="isDeleted"
+              label="isDeleted"
               width="180">
             </el-table-column>
             <el-table-column
-              prop="mobile"
-              label="mobile">
+              prop="gmtCreate"
+              label="gmeCreate">
             </el-table-column>
           </el-table>
         </el-main>
@@ -92,57 +91,60 @@
 import courseApi from '@/api/course'
 import loginApi from "@/api/login"
 import cookie from 'js-cookie'
+
 export default {
   data() {
     return {
       tabledata: [{
-        nickname:"",
+
       }],
-      testData:[
+      testData: [
         {
-          id:"123",
-          nickname:"456",
-          mobile:"567",
-          avatar:"1231231231"
+          id: "123",
+          nickname: "456",
+          mobile: "567",
+          avatar: "1231231231"
         }
       ]
     }
   },
   created() {
 
-    // //this.initSubject()
-    this.isLogin()
-    console.log("before create")
+    // //检查是否登陆
+    // this.isLogin()
+
+    //初始化tabledata
     this.initUserData()
-    console.log("ininted!!!")
 
   },
   methods: {
     //判断是否null
-    isNotNull(data){
-      return (data == "" || data == undefined || data == null) ? false: true;
+    isNotNull(data) {
+      return (data == "" || data == undefined || data == null) ? false : true;
     },
     //判断是否登录
-    isLogin(){
-      if(this.isNotNull(cookie.get('guli_token'))){
+    isLogin() {
+      if (this.isNotNull(cookie.get('guli_token'))) {
         console.log(cookie.get('guli_token'))
-      }
-      else{
-        window.location.href="/login"
+      } else {
+        window.location.href = "/login"
       }
     },
     //获取userinfo
     initUserData() {
-      console.log("enter this function!")
+
       loginApi.getLoginUserInfo()
         .then(response => {
-          let data_ = response.data.data.userInfo
-          this.tabledata[0] = data_;
-          this.tabledata = Array.from(this.tabledata)
-          console.log("tabledata is ")
-          console.log(this.tabledata)
-         // console.log(this.testData)
-        })
+          let memberID = response.data.data.userInfo.id;
+          console.log(memberID)
+          courseApi.queryStarList(memberID)
+            .then(response => {
+              console.log(response)
+              this.tabledata =  response.data.data.starList;
+              }
+            )
+        }
+        )
     },
   }
 };
@@ -152,9 +154,11 @@ export default {
 .active {
   background: #bdbdbd;
 }
+
 .hide {
   display: none;
 }
+
 .show {
   display: block;
 }

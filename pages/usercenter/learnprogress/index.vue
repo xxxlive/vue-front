@@ -20,11 +20,15 @@
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
-            <template slot="title"><i class="el-icon-menu"></i>导航二</template>
+            <template slot="title"><i class="el-icon-menu"></i>Course</template>
             <el-menu-item-group>
               <template slot="title">分组一</template>
-              <el-menu-item index="2-1">选项1</el-menu-item>
-              <el-menu-item index="2-2">选项2</el-menu-item>
+              <el-menu-item index="2-1">
+                <router-link to="/usercenter/favorite" exact>
+                  <a>Favorite</a>
+                </router-link>
+              </el-menu-item>
+              <el-menu-item index="2-2">Recommended</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="分组2">
               <el-menu-item index="2-3">选项3</el-menu-item>
@@ -59,26 +63,26 @@
             <div>
               <el-main>
                 <div>
-                
+
                   <el-progress type="circle" :percentage=(this.tabledata[0].courseContent.length)/this.tabledata[0].totCourse*100  :format="format1" :color="formatColor" ></el-progress>
-                 
+
                   <el-progress type="circle" :percentage=(this.tabledata[1].courseContent.length)/this.tabledata[1].totCourse*100  :format="format2" :color="formatColor"></el-progress>
-               
+
                   <el-progress type="circle" :percentage=(this.tabledata[2].courseContent.length)/this.tabledata[2].totCourse*100  :format="format3" :color="formatColor"></el-progress>
-                  
+
                   <el-progress type="circle" :percentage=(this.tabledata[3].courseContent.length)/this.tabledata[3].totCourse*100  :format="format4" :color="formatColor" ></el-progress>
-            
+
                   <el-progress type="circle" :percentage=(this.tabledata[4].courseContent.length)/this.tabledata[4].totCourse*100  :format="format5" :color="formatColor"></el-progress>
-                 
+
                   <el-progress type="circle" :percentage=(this.tabledata[5].courseContent.length)/this.tabledata[5].totCourse*100  :format="format6" :color="formatColor"></el-progress>
-               
+
                   <el-progress type="circle" :percentage=(this.tabledata[6].courseContent.length)/this.tabledata[6].totCourse*100  :format="format7" :color="formatColor"></el-progress>
-                 
+
                   <el-progress type="circle" :percentage=(this.tabledata[7].courseContent.length)/this.tabledata[7].totCourse*100  :format="format8" :color="formatColor"></el-progress>
-             
+
                   <el-progress type="circle" :percentage=this.totalpercentage :format="formatTol" :color="formatColor"></el-progress>
                 </div>
-                
+
             </el-main>
             </div>
 
@@ -175,7 +179,7 @@ export default {
                 console.log("this is data:")
                 console.log(response.data.data.data)
                 this.tabledata = response.data.data.data;
-                
+
                 var sum=0;
                 var totcourses = 0;
                 var i = 0;
@@ -185,7 +189,7 @@ export default {
                   console.log("tot")
                   console.log(totcourses)
 
-                  
+
                 }
                 let toround = Math.round(sum/totcourses*100);
                 this.totalpercentage = toround
@@ -195,7 +199,7 @@ export default {
                 // console.log(typeof course_data)
                 // console.log(course_data)
             })
-            
+
         })
     },
   formatColor(percentage){
@@ -240,7 +244,7 @@ export default {
     return `System Maintenance ${percentage}%`;
   },
   formatTol(){
-    
+
     return `Total courses ${this.totalpercentage}%`
   }
   }
