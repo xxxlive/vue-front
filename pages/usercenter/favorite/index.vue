@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-container style="height: 500px; border: 1px solid #eee">
+    <el-container style="height: 100%; border: 1px solid #eee">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <el-menu>
           <el-submenu index="1">
@@ -60,25 +60,48 @@
           <span>{{ tabledata[0].nickname }}</span>
         </el-header>
 
-        <el-main>
+        <el-main
+          style="height:100%">
           <el-table
             :data="tabledata"
-            height="250"
+            height="800"
             border
             style="width: 100%">
             <el-table-column
-              prop="courseId"
-              label="CourseID"
+              prop="cover"
+              label="Course cover"
               width="180">
+              <template slot-scope="scope">
+            <span>
+
+              <img :src="scope.row.cover" alt="" class="table-img" width="150px">
+              <!--              <span class="table-title">{{ scope.row.cover }}</span>-->
+            </span>
+              </template>
+
             </el-table-column>
             <el-table-column
-              prop="isDeleted"
-              label="isDeleted"
+              prop="title"
+              label="title"
               width="180">
             </el-table-column>
             <el-table-column
               prop="gmtCreate"
-              label="gmeCreate">
+              label="Course time">
+            </el-table-column>
+            <el-table-column
+              prop="price"
+              label="Price">
+            </el-table-column>
+            <el-table-column
+              label="Cancel Star">
+              <template slot-scope="scope">
+            <span>
+                <el-button type="danger" icon="el-icon-delete" circle @click="unstar(scope.row.id)"></el-button>
+
+            </span>
+              </template>
+
             </el-table-column>
           </el-table>
         </el-main>
@@ -95,9 +118,7 @@ import cookie from 'js-cookie'
 export default {
   data() {
     return {
-      tabledata: [{
-
-      }],
+      tabledata: [{}],
       testData: [
         {
           id: "123",
@@ -135,17 +156,33 @@ export default {
 
       loginApi.getLoginUserInfo()
         .then(response => {
-          let memberID = response.data.data.userInfo.id;
-          console.log(memberID)
-          courseApi.queryStarList(memberID)
-            .then(response => {
-              console.log(response)
-              this.tabledata =  response.data.data.starList;
-              }
-            )
-        }
+            let memberID = response.data.data.userInfo.id;
+            console.log(memberID)
+            courseApi.queryStarList(memberID)
+              .then(response => {
+                  console.log(response)
+                  this.tabledata = response.data.data.starList;
+                }
+              )
+          }
         )
     },
+
+    //取消star这个课程
+    unstar(id) {
+      console.log(id);
+      loginApi.getLoginUserInfo().then(response => {
+        let memberID = response.data.data.userInfo.id;
+        courseApi
+          .unstarOneCourse(memberID, id)
+          .then(response => {
+              console.log(response)
+            }
+          );
+      }
+      )
+
+    }
   }
 };
 </script>

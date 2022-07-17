@@ -57,31 +57,41 @@
       </el-aside>
 
       <el-container>
-        <el-header style="text-align: right; font-size: 12px">
-          <span>{{tabledata[0].nickname}}</span>
-        </el-header>
-
         <el-main>
-          <el-table
-            :data="tabledata"
-            height="250"
-            border
-            style="width: 100%">
-            <el-table-column
-              prop="id"
-              label="User ID"
-              width="180">
-            </el-table-column>
-            <el-table-column
-              prop="nickname"
-              label="Nickname"
-              width="180">
-            </el-table-column>
-            <el-table-column
-              prop="mobile"
-              label="mobile">
-            </el-table-column>
-          </el-table>
+
+          <div>
+            Basic Information:
+            <el-input
+              placeholder="Please enter your nickname"
+              prefix-icon="el-icon-user-solid"
+              v-model="userInfo.nickname"
+              >
+            </el-input>
+            <el-input
+              placeholder="Please enter your phone number"
+              prefix-icon="el-icon-phone"
+              v-model="userInfo.mobile">
+            </el-input>
+
+            <div>sex:
+              <el-radio v-model="userInfo.sex" label="0">male</el-radio>
+              <el-radio v-model="userInfo.sex" label="1">female</el-radio>
+            </div>
+            <div>
+              avatar:
+              <img :src="userInfo.avatar" @click="UploadAvatar"/>
+            </div>
+
+            <el-input
+              placeholder="Please enter your sign"
+              prefix-icon="el-icon-chat-line-square"
+              v-model="userInfo.sign"
+            >
+            </el-input>
+          </div>
+          <el-button type="primary">Submit</el-button>
+
+
         </el-main>
       </el-container>
     </el-container>
@@ -95,24 +105,16 @@ import cookie from 'js-cookie'
 export default {
   data() {
     return {
-      tabledata: [{
-        nickname:"",
-      }],
-      testData:[
-        {
-          id:"123",
-          nickname:"456",
-          mobile:"567",
-          avatar:"1231231231"
-        }
-      ]
+      userInfo:"",
+      imagecropperShow:false,
     }
   },
   created() {
 
     // //this.initSubject()
+    //确认是否登陆
     this.isLogin()
-    console.log("before create")
+    //初始化用户信息
     this.initUserData()
     console.log("ininted!!!")
 
@@ -137,15 +139,36 @@ export default {
       loginApi.getLoginUserInfo()
         .then(response => {
           let data_ = response.data.data.userInfo
-          this.tabledata[0] = data_;
-          this.tabledata = Array.from(this.tabledata)
-          console.log("tabledata is ")
-          console.log(this.tabledata)
-         // console.log(this.testData)
+          this.userInfo = data_;
+
+          console.log("user info is ")
+          console.log(this.userInfo)
         })
     },
+
+    //点击头像可以从本地选图片
+    UploadAvatar(){
+      console.log("should select a file from computer and up load to aliyun oss")
+    },
+
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    }
   }
-};
+  };
+
 </script>
 
 <style scoped>
@@ -156,6 +179,29 @@ export default {
   display: none;
 }
 .show {
+  display: block;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
   display: block;
 }
 </style>

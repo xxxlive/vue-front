@@ -122,8 +122,7 @@ export default {
           this.tabledata[0] = data_;
           this.tabledata = Array.from(this.tabledata)
           console.log("tabledata is ")
-          console.log(typeof this.tabledata)
-          console.log(this.testData)
+
         })
     },
   }

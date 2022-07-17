@@ -325,6 +325,10 @@ export default {
               this.isStared = response.data.data.result;
               console.log("现在的收藏状态：");
               console.log(this.isStared);
+              //如果收藏了小星星应该是亮的
+              if(this.isStared===true){
+                this.changeIcon("up");
+              }
             });
         });
       });
@@ -430,7 +434,7 @@ export default {
       }else{
         tochangeNode.setAttribute("class","icon18 sc_en")
       }
-      
+
     }
   }
 };
