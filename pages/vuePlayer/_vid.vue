@@ -1,10 +1,14 @@
 <template>
   <div id="app">
     <template v-if="!isShowMultiple && show">
-      <vue-aliplayer-v2
-        :source="source"
-        ref="VueAliplayerV2"
-        :options="options"
+<!--      <vue-aliplayer-v2-->
+<!--        :source="source"-->
+<!--        ref="VueAliplayerV2"-->
+<!--        :options="options"-->
+<!--      />-->
+      <NPlayer
+        :options="{ src: this.source }"
+        :set="setPlayer"
       />
     </template>
   <template>

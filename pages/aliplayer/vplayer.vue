@@ -1,6 +1,6 @@
 <template>
     <div id="videomonitoring">
-        
+
          <div>
             <el-card class="box-card">
                 <div style="height:600px">
@@ -15,7 +15,7 @@ export default {
       asyncData({query,error}) {
             return {
                 vid: query.vid,
-                vUrl:decodeURIComponent(query.vUrl),  
+                vUrl:decodeURIComponent(query.vUrl),
                 // 获取传过来的对象参数
                 courseWebVo:JSON.parse(decodeURIComponent(query.courseWebVo)),
                 chapterVideoList:JSON.parse(decodeURIComponent(query.chapterVideoList))
@@ -125,30 +125,30 @@ export default {
                 instance: null,
                 //数据存放变量
                 // eslint-disable-next-line vue/no-dupe-keys
-                vid:'',  
+                vid:'',
                 vUrl:'',
                 courseWebVo:'',
                 chapterVideoList:'',
                 videoListArgs:[]
             }
         },
-        
+
         created() {
-            
-            //数据初始化
+
+            //数据初
             this.initData(this.chapterVideoList);
             this.init();
             if (window.Aliplayer !== undefined) {
                 // 如果全局对象存在，说明编辑器代码已经初始化完成，直接加载编辑器
                 this.scriptTagStatus = 2;
                 this.initAliplayer();
-                
-                
+
+
             } else {
                 // 如果全局对象不存在，说明编辑器代码还没有加载完成，需要加载编辑器代码
                 this.insertScriptTag();
             }
-            
+
         },
         methods: {
         //用户自定义绑定数据方法
@@ -157,7 +157,7 @@ export default {
                 const list=[];
                 const finalList=[];
                 const vlist=dataList;
-                for(var i = 0,len=vlist.length; i < len; i++) { 
+                for(var i = 0,len=vlist.length; i < len; i++) {
                     var childrens=vlist[i].children;
                     for(var j = 0,len=childrens.length; j < len; j++){
                     var splb={
@@ -168,7 +168,7 @@ export default {
                     splb.source=childrens[j].videoSourceUrl;
                     list.push(splb);
                     }
-        
+
                 }
                 finalList.push(list);
                 this.videoListArgs=finalList;
@@ -202,10 +202,10 @@ export default {
         {name: "volume", align: "tr", x: 5, y: 10}
       ]
     }
-  ];  
+  ];
             this.$props.skinLayout=this.skinLayout;
             },
-            
+
             //播放器相关方法
             insertScriptTag() {
                 const _this = this;
@@ -236,7 +236,7 @@ export default {
                 if ( _this.scriptTagStatus === 2 && (_this.instance === null || _this.reloadPlayer) ) {
                     _this.instance && _this.instance.dispose();
                     // console.log(document.querySelector("#" + _this.playerId));
-                    
+
                     // document.querySelector("#" + _this.playerId).innerHTML = "";
                     // Vue 异步执行 DOM 更新，这样一来代码执行到这里的时候可能 template 里面的 script 标签还没真正创建
                     // 所以，我们只能在 nextTick 里面初始化 Aliplayer
@@ -252,7 +252,7 @@ export default {
                             controlBarVisibility: _this.controlBarVisibility,
                             useH5Prism: _this.useH5Prism,
                             useFlashPrism: _this.useFlashPrism,
-                            
+
                             vid: _this.vid,
                             playauth: _this.playauth,
                             source: _this.source,
@@ -413,7 +413,7 @@ export default {
                 // 如果全局对象不存在，说明编辑器代码还没有加载完成，需要加载编辑器代码
                 this.insertScriptTag();
             }
-            
+
             /* const _this = this;
             _this.$nextTick(() => {
                 var player = new Aliplayer({
@@ -425,7 +425,7 @@ export default {
                     //播放方式二：点播用户推荐
                     vid : '1e067a2831b641db90d570b6480fbc40',
                     playauth : '',
-                    cover: 'http://liveroom-img.oss-cn-qingdao.aliyuncs.com/logo.png',            
+                    cover: 'http://liveroom-img.oss-cn-qingdao.aliyuncs.com/logo.png',
                     //播放方式三：仅MPS用户使用
                     vid : '1e067a2831b641db90d570b6480fbc40',
                     accId: '',
@@ -443,7 +443,7 @@ export default {
                 },function(player){
                     console.log('播放器创建好了。')
                     // console.log(player.getCurrentTime());
-                    
+
                 });
             }); */
         }

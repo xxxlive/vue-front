@@ -432,6 +432,7 @@ export default {
           console.log(this.isStared);
         });
     },
+    //当点击过收藏或取消收藏后，图标应该相应发生改变
     changeIcon(to_class){
       var tochangeNode = document.getElementById('tochange');
       console.log(tochangeNode)
