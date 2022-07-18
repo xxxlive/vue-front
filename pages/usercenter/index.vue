@@ -69,8 +69,6 @@
   </div>
 </template>
 <script>
-
-import courseApi from '@/api/course'
 import loginApi from "@/api/login"
 import cookie from 'js-cookie'
 export default {
@@ -88,7 +86,6 @@ export default {
     }
   },
   created() {
-
     //this.initSubject()
     this.isLogin()
     console.log("123")
@@ -122,6 +119,9 @@ export default {
           this.tabledata[0] = data_;
           this.tabledata = Array.from(this.tabledata)
           console.log("tabledata is ")
+          // >>>>>>>>>>>>>>>>> edited version
+          // this.tabledata = response.data.data.userInfo;
+          // <<<<<<<<<<<<<<<<<
 
         })
     },
