@@ -65,7 +65,7 @@
               placeholder="Please enter your nickname"
               prefix-icon="el-icon-user-solid"
               v-model="userInfo.nickname"
-              >
+            >
             </el-input>
             <el-input
               placeholder="Please enter your phone number"
@@ -77,9 +77,10 @@
               <el-radio v-model="userInfo.sex" label="0">male</el-radio>
               <el-radio v-model="userInfo.sex" label="1">female</el-radio>
             </div>
-            <div>
+            <div class="avatar-container">
               avatar:
-              <img :src="userInfo.avatar" @click="UploadAvatar"/>
+              <img :src="userInfo.avatar" alt="avatar" @click="imageCropperShow=true" class="avatar"/>
+              <h1 class="caption" @click="imageCropperShow=true">Change avatar</h1>
             </div>
 
             <el-input
@@ -95,18 +96,34 @@
         </el-main>
       </el-container>
     </el-container>
+    <image-cropper
+      v-show="imageCropperShow"
+      :width="300"
+      :height="300"
+      :key="imageCropperKey"
+      url="http://47.95.195.219:8223/eduoss/fileoss"
+      field="file"
+      @close="closeImageCropper"
+      @crop-upload-success="cropSuccess"/>
   </div>
 </template>
 
 <script>
+import ImageCropper from "@/components/ImageCropper"
 import courseApi from '@/api/course'
 import loginApi from "@/api/login"
+import ucenterApi from '@/api/ucenter'
 import cookie from 'js-cookie'
+
 export default {
+  components: {
+    ImageCropper
+  },
   data() {
     return {
-      userInfo:"",
-      imagecropperShow:false,
+      imageCropperShow: false,
+      imageCropperKey: 0,
+      userInfo: "",
     }
   },
   created() {
@@ -116,21 +133,20 @@ export default {
     this.isLogin()
     //初始化用户信息
     this.initUserData()
-    console.log("ininted!!!")
+    console.log("initiated!!!")
 
   },
   methods: {
     //判断是否null
-    isNotNull(data){
-      return (data == "" || data == undefined || data == null) ? false: true;
+    isNotNull(data) {
+      return (data == "" || data == undefined || data == null) ? false : true;
     },
     //判断是否登录
-    isLogin(){
-      if(this.isNotNull(cookie.get('guli_token'))){
+    isLogin() {
+      if (this.isNotNull(cookie.get('guli_token'))) {
         console.log(cookie.get('guli_token'))
-      }
-      else{
-        window.location.href="/login"
+      } else {
+        window.location.href = "/login"
       }
     },
     //获取userinfo
@@ -145,29 +161,37 @@ export default {
           console.log(this.userInfo)
         })
     },
-
-    //点击头像可以从本地选图片
-    UploadAvatar(){
-      console.log("should select a file from computer and up load to aliyun oss")
+    closeImageCropper() {
+      this.imageCropperShow = false
+      // 上传组件初始化
+      this.imageCropperKey = this.imageCropperKey + 1
     },
+    cropSuccess(data) {
+      console.log('crop successfully')
+      this.imageCropperShow = false
+      this.imageCropperKey = this.imageCropperKey + 1
+      // 上传之后接口返回图片地址
+      this.userInfo.avatar = data.data.url
 
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
-      }
-      return isJPG && isLt2M;
+      console.log(this.userInfo)
+      ucenterApi.updateUser(this.userInfo)
+        .then(response => { // 修改成功
+          // 提示信息
+          this.$message({
+            type: 'success',
+            message: '修改成功!'
+          })
+        }).catch(err => {
+        this.$message({
+          type: 'warning',
+          message: '修改失败!'
+        })
+        // 回到dashboard页面 路由跳转
+        this.$router.push({path: '/usercenter'})
+      })
     }
   }
-  };
+};
 
 </script>
 
@@ -175,12 +199,15 @@ export default {
 .active {
   background: #bdbdbd;
 }
+
 .hide {
   display: none;
 }
+
 .show {
   display: block;
 }
+
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -188,9 +215,11 @@ export default {
   position: relative;
   overflow: hidden;
 }
+
 .avatar-uploader .el-upload:hover {
   border-color: #409EFF;
 }
+
 .avatar-uploader-icon {
   font-size: 28px;
   color: #8c939d;
@@ -199,9 +228,30 @@ export default {
   line-height: 178px;
   text-align: center;
 }
+
 .avatar {
-  width: 178px;
-  height: 178px;
+  width: 100px;
+  height: 100px;
   display: block;
+  border-radius: 4px;
+  transition-duration: .3s;
+}
+
+.avatar-container:hover .avatar {
+  filter: blur(4px) brightness(.6);
+  transition-duration: .3s;
+}
+
+.caption {
+  visibility: hidden;
+  color: #FFFFFF;
+  position: relative;
+  bottom: 75px;
+  transition-duration: .3s;
+}
+
+.avatar-container:hover .caption {
+  visibility: visible;
+  transition-duration: .3s;
 }
 </style>

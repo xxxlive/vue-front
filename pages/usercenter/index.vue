@@ -78,7 +78,6 @@
 
 import courseApi from '@/api/course'
 import loginApi from "@/api/login"
-
 import cookie from 'js-cookie'
 import { onMounted } from "vue";
 export default {
@@ -121,8 +120,8 @@ export default {
         window.location.href="/login"
       }
     },
-
-    initPage() {
+    //获取userinfo
+    initUserData() {
       console.log("enter this function!")
 
     },
