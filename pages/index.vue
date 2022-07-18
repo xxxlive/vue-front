@@ -2,19 +2,37 @@
   <div>
 
     <!-- 幻灯片 开始 -->
-    <div v-swiper:mySwiper="swiperOption">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="item in bannerList" :key="item.id" style="background: #040B1B;">
-            <a target="_blank" :href="item.linkUrl">
-                <img :src="item.imageUrl" :alt="item.title">
-           </a>
-        </div>
+<!--    <div v-swiper:mySwiper="swiperOption">-->
+<!--      <div class="swiper-wrapper">-->
+<!--        <div class="swiper-slide" v-for="item in bannerList" :key="item.id" style="background: #040B1B;">-->
+<!--            <a target="_blank" :href="item.linkUrl">-->
+<!--                <img :src="item.imageUrl" :alt="item.title">-->
+<!--           </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--   <div class="swiper-pagination swiper-pagination-white"></div>-->
+<!--    <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>-->
+<!--    <div class="swiper-button-next swiper-button-white" slot="button-next"></div>-->
+<!--</div>-->
+
+    <!--    尝试进行视频播放-->
+    <div class="block">
+      <el-carousel height="500px" type="card">
+        <el-carousel-item v-for="item in 4" :key="item">
+          <div class="video_banner" >
+            <video  autoplay muted loop width="952px">
+              <source type="video/mp4" src="~/assets/video/Mini2_Showreel_S32_Banner_10s_V4_1200x720.mp4">
+            </video>
+
+          </div>
+        </el-carousel-item>
+      </el-carousel>
     </div>
-   <div class="swiper-pagination swiper-pagination-white"></div>
-    <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-    <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-</div>
-<!-- 幻灯片 结束 -->
+
+
+
+
+    <!-- 幻灯片 结束 -->
      <div id="aCoursesList">
       <!-- 在线教育网课程 开始 -->
       <header class="comm-title">
@@ -25,6 +43,7 @@
         <el-scrollbar height="100%">
           <el-row :gutter="40" class="centered">
             <el-col :span="5" :offset="2">
+
               <div class="card-content bg-purple-light">
                 <img src="~/assets/img/qq-icon.png" alt="">
                 <h3>在线教育网课程</h3>
@@ -74,6 +93,8 @@
             </el-col>
           </el-row>
         </el-scrollbar>
+
+<!--       进行课程加载-->
 
       <div>
         <section class="container">
@@ -178,6 +199,8 @@ import index from '@/api/index'
 export default {
   data() {
     return {
+
+
       swiperOption: {
         autoplay: true,
         autoplay: {
@@ -235,3 +258,38 @@ export default {
   }
 }
 </script>
+
+
+<style>
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+  background-color: #d3dce6;
+}
+
+section_test{
+  position: absolute;
+  top : 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  height: 400px;
+  width: 1200px;
+  background: #000000;
+  box-shadow: 0 25px 30px rgba(0,0,0,.5);
+  z-index: 2;
+  display: flex;
+
+}
+
+
+</style>
