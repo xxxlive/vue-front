@@ -49,6 +49,7 @@
               <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">
                   <a href="#" title>
                       <img
+                          id = "avatar_header"
                           :src="loginInfo.avatar"
                           width="30"
                           height="30"

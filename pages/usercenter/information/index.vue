@@ -90,7 +90,7 @@
             >
             </el-input>
           </div>
-          <el-button type="primary">Submit</el-button>
+          <el-button type="primary" @click="submitUserInfo">Submit</el-button>
 
 
         </el-main>
@@ -181,6 +181,8 @@ export default {
             type: 'success',
             message: '修改成功!'
           })
+          //右上角图标跟着变
+          this.changeHeaderAvatar();
         }).catch(err => {
         this.$message({
           type: 'warning',
@@ -189,7 +191,22 @@ export default {
         // 回到dashboard页面 路由跳转
         this.$router.push({path: '/usercenter'})
       })
+    },
+
+
+    //更改右上角头像的方法
+    changeHeaderAvatar(){
+      let headerAvatarDom = document.getElementById("avatar_header");
+      // console.log(headerAvatarDom)
+      headerAvatarDom.setAttribute("src",this.userInfo.avatar)
+    },
+
+    //提交用户修改、新增信息的接口
+    submitUserInfo(){
+      console.log("should upload userinfo here!")
+
     }
+
   }
 };
 

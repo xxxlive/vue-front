@@ -58,15 +58,9 @@
       </el-aside>
 
       <el-container>
-        <template>
-          <div>
-            <NPlayer
-              :options="{ src: this.videoLink }"
-              :set="setPlayer"
-            />
-          </div>
-        </template>
-
+        <div class="centered" style="margin-left:auto; margin-right:auto">
+            <img src="@/assets/img/pic/huawei.jpg" width="400px">
+        </div>
       </el-container>
     </el-container>
 
@@ -79,7 +73,6 @@
 import courseApi from '@/api/course'
 import loginApi from "@/api/login"
 import cookie from 'js-cookie'
-import { onMounted } from "vue";
 export default {
   data() {
     return {
@@ -91,8 +84,7 @@ export default {
           mobile:"567",
           avatar:"1231231231"
         }
-      ],
-      videoLink:"http://f.video.weibocdn.com/u0/wwt6AyIwgx07XiGsvuLe010412005d6B0E010.mp4?label=mp4_720p&template=720x1424.24.0&ori=0&ps=1BVTBXVDGJSdhR&Expires=1658122709&ssig=2lnmH%2FB3T7&KID=unistore,video"
+      ]
     }
   },
   created() {
@@ -121,7 +113,7 @@ export default {
       }
     },
     //获取userinfo
-    initUserData() {
+    initPage() {
       console.log("enter this function!")
 
     },
