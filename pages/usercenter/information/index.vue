@@ -72,7 +72,11 @@
               prefix-icon="el-icon-phone"
               v-model="userInfo.mobile">
             </el-input>
-
+            <el-input
+              placeholder="You can change your password here"
+              prefix-icon="el-icon-refresh"
+              v-model="newPassword">
+            </el-input>
             <div>sex:
               <el-radio v-model="userInfo.sex" label="0">male</el-radio>
               <el-radio v-model="userInfo.sex" label="1">female</el-radio>
@@ -91,6 +95,7 @@
             </el-input>
           </div>
           <el-button type="primary" @click="submitUserInfo">Submit</el-button>
+<!--          <el-button type="primary" @click="testMD5">Submit</el-button>-->
 
 
         </el-main>
@@ -113,6 +118,7 @@ import ImageCropper from "@/components/ImageCropper"
 import courseApi from '@/api/course'
 import loginApi from "@/api/login"
 import ucenterApi from '@/api/ucenter'
+import md5 from 'js-md5';
 import cookie from 'js-cookie'
 
 export default {
@@ -124,6 +130,7 @@ export default {
       imageCropperShow: false,
       imageCropperKey: 0,
       userInfo: "",
+      newPassword:"",
     }
   },
   created() {
@@ -174,6 +181,29 @@ export default {
       this.userInfo.avatar = data.data.url
 
       console.log(this.userInfo)
+
+    },
+
+
+    //更改右上角头像的方法
+    changeHeaderAvatar(){
+      let headerAvatarDom = document.getElementById("avatar_header");
+      // console.log(headerAvatarDom)
+      headerAvatarDom.setAttribute("src",this.userInfo.avatar)
+    },
+    //返回md5
+    MD5(){
+      console.log(md5(this.newPassword))
+    },
+    //提交用户修改、新增信息的接口
+    submitUserInfo(){
+      if(this.newPassword==""){
+        //没有新密码，直接回传旧的
+      }else{
+        //更新了密码，加密后回传
+        let EncryptedPassword = md5(this.newPassword);
+        this.userInfo.password = EncryptedPassword;
+      }
       ucenterApi.updateUser(this.userInfo)
         .then(response => { // 修改成功
           // 提示信息
@@ -191,20 +221,6 @@ export default {
         // 回到dashboard页面 路由跳转
         this.$router.push({path: '/usercenter'})
       })
-    },
-
-
-    //更改右上角头像的方法
-    changeHeaderAvatar(){
-      let headerAvatarDom = document.getElementById("avatar_header");
-      // console.log(headerAvatarDom)
-      headerAvatarDom.setAttribute("src",this.userInfo.avatar)
-    },
-
-    //提交用户修改、新增信息的接口
-    submitUserInfo(){
-      console.log("should upload userinfo here!")
-
     }
 
   }

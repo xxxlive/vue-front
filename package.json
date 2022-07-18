@@ -20,6 +20,7 @@
     "babel-loader": "^8.0.6",
     "element-ui": "^2.13.2",
     "js-cookie": "^2.2.1",
+    "js-md5": "^0.7.3",
     "less-loader": "^6.0.0",
     "nplayer": "^1.0.13",
     "nuxt": "^2.0.0",
