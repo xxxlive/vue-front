@@ -6,12 +6,16 @@
       <!--        ref="VueAliplayerV2"-->
       <!--        :options="options"-->
       <!--      />-->
-      <NPlayer
-        id="NPlayer"
-        :options="{ src: this.source, plugins: [danmaku] }"
-        :set="setPlayer"
+      <div  id="toMountNPlayer" ></div>
+      <!--      <NPlayer-->
+      <!--        id="NPlayer"-->
+      <!--        :options="{ src: this.source, plugins: [danmaku,],-->
 
-      />
+
+      <!--        controls: [['play', 'danmaku-send', 'danmaku-settings'], ['progress']]}"-->
+
+
+      <!--      />-->
     </template>
     <el-button @click="logNplayer">this is a button</el-button>
     <template>
@@ -258,10 +262,11 @@
 import vod from '@/api/vod'
 import cookie from 'js-cookie'
 import commentApi from '@/api/comment'
-import Danmaku from "@nplayer/danmaku";
-import NPlayer from "@nplayer/vue";
-import items from "./items";
+import Player from 'nplayer'
+import Danmaku from '@nplayer/danmaku'
+import DanmuApi from '@/api/Danmu'
 /////////////////////////////课程评论相关
+
 const clickoutside = {
   // 初始化指令
   bind(el, binding, vnode) {
@@ -290,31 +295,49 @@ const clickoutside = {
   },
 };
 export default {
+
   asyncData({params, error}) {
     return {id: params.id}
   },
   name: 'ArticleComment',
   data() {
-    return {
-        danmu:{
-          items: [
-            {
-              text: "口技 ",
-              time: 0
-            },
-            {
-              text: "傻袍子 ",
-              time: 0,
-              color: "#2196F3"
-            },
-            {
-              text: "233真的是摔啊 ",
-              time: 1,
-              color: "#2196F3"
-            }],
+    var danmuData = {
+      items: [
+        {
+          text: "口技 ",
+          time: 0
         },
+        {
+          text: "傻袍子 ",
+          time: 0,
+          color: "#2196F3"
+        },
+        {
+          text: "233真的是摔啊 ",
+          time: 1,
+          color: "#2196F3"
+        }],
+    };
+    return {
+      danmu: {
+        items: [
+          {
+            text: "口技 ",
+            time: 0
+          },
+          {
+            text: "傻袍子 ",
+            time: 0,
+            color: "#2196F3"
+          },
+          {
+            text: "233真的是摔啊 ",
+            time: 1,
+            color: "#2196F3"
+          }],
+      },
 
-      danmaku: new Danmaku({items}),
+      danmaku: new Danmaku(danmuData),
       vid: '',
       vUrl: '',
       courseWebVo: {},
@@ -373,6 +396,12 @@ export default {
     this.showInfo()
     this.init()
     this.initComment()
+
+
+  },
+  mounted() {
+    //从后端获取弹幕文件,将播放器挂载上去
+    this.initDanmaku();
   },
   directives: {clickoutside},
   methods: {
@@ -633,12 +662,55 @@ export default {
       }
     },
     logNplayer() {
-      let NplayerDom = document.getElementById("NPlayer");
-      console.log(NplayerDom)
+      // let NplayerDom = document.getElementById("NPlayer");
+      // console.log(NplayerDom)
       console.log(this.danmaku)
-      console.log({items})
-      console.log(this.danmu)
-      console.log(JSON.parse(JSON.stringify(this.danmu)))
+
+
+
+
+    },
+    //传送vid和弹幕到后端
+    SendDanmuToBackend(opts) {
+      console.log("发送了弹幕")
+      console.log(opts);
+      console.log(this.options.vid);
+      opts = JSON.stringify(opts)
+      let data = {vid:this.options.vid,danmu:opts}
+      console.log(data)
+      DanmuApi.AddDanmuByID(data)
+        .then(response => {
+          console.log(response)
+        })
+    },
+    initDanmaku() {
+
+      //挂载nplayer并且从后端请求弹幕文件
+      DanmuApi.GetDanmuByID(this.options.vid)
+      .then(response =>{
+        console.log(response)
+        let data = response.data.data.danmuArray;
+        console.log(data)
+        data = data.sort((a, b) => a.time - b.time)
+        this.danmaku = new Danmaku({items:data})
+        var nplayer = new Player({
+          src:this.source,
+          plugins: [this.danmaku]
+        })
+
+        //监听"发送弹幕事件"
+        nplayer.on('DanmakuSend', (opts) => {
+          console.log(opts)
+          //回传弹幕
+          this.SendDanmuToBackend(opts);
+        })
+        let toMountDom = document.getElementById("toMountNPlayer")
+        console.log(toMountDom)
+        console.log(123)
+        nplayer.mount(toMountDom)
+      })
+
+
     }
   },
 };
