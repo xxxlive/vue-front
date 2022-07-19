@@ -5,7 +5,7 @@
 }
 .bg-orange {
   /*这个暂时也不知道是谁的颜色*/
-  background-color: #fd0263;
+  background-color: #ff6f40;
 }
 .nav li.current a,
 .nav li a:hover,
@@ -22,9 +22,10 @@
 .u-m-dd ul li.current a,
 .d-s-head-tab a.current {
   /*导航栏的下划线颜色*/
-  border-color: #0156d1;
+  border-color: #74a9ef;
   /*控制导航栏内部字体的颜色*/
-  color: #74a9ef;
+  color: #7b7b7b;
+
 }
 .lh-menu ul li.lh-menu-stair ol li.lh-menu-second a.current-2,
 .lh-menu ul li.lh-menu-stair li.lh-menu-second a.current-2,

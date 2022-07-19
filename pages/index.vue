@@ -35,110 +35,43 @@
     <!-- 幻灯片 结束 -->
      <div id="aCoursesList">
       <!-- 在线教育网课程 开始 -->
-      <header class="comm-title">
-        <h2 class="tac">
-          <span class="c-333">内容频道</span>
-        </h2>
-      </header>
-        <el-scrollbar height="100%">
-          <el-row :gutter="40" class="centered">
-            <el-col :span="5" :offset="2">
 
-              <div class="card-content bg-purple-light">
-                <img src="~/assets/img/qq-icon.png" alt="">
-                <h3>在线教育网课程</h3>
-                <p>在线教育网课程</p>
-              </div>
-            </el-col>
-            <el-col :span="5">
-              <div class="card-content bg-purple-light">
-                <img src="~/assets/img/qq-icon.png" alt="">
-                <h3>在线教育网课程</h3>
-                <p>在线教育网课程</p>
-              </div>
-            </el-col>
-            <el-col :span="5">
-              <div class="card-content bg-purple-light">
-                <img src="~/assets/img/qq-icon.png" alt="">
-                <h3>在线教育网课程</h3>
-                <p>在线教育网课程</p>
-              </div>
-            </el-col>
-            <el-col :span="5">
-              <div class="card-content bg-purple-light">
-                <div class="card-content bg-purple-light">
-                  <img src="~/assets/img/qq-icon.png" alt="">
-                  <h3>在线教育网课程</h3>
-                  <p>在线教育网课程</p>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="5">
-              <div class="card-content bg-purple-light">
-                <div class="card-content bg-purple-light">
-                  <img src="~/assets/img/qq-icon.png" alt="">
-                  <h3>在线教育网课程</h3>
-                  <p>在线教育网课程</p>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="5">
-              <div class="card-content bg-purple-light">
-                <div class="card-content bg-purple-light">
-                  <img src="~/assets/img/qq-icon.png" alt="">
-                  <h3>在线教育网课程</h3>
-                  <p>在线教育网课程</p>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
-        </el-scrollbar>
 
-<!--       进行课程加载-->
 
-      <div>
-        <section class="container">
+      <div style="background-color: #f5f7f8">
+        <section class="container" >
           <header class="comm-title">
-            <section class="tal table">
-              <span class="c-333 fsize24 table-cell">Popular Courses</span>
-              <a href="/course" title="全部课程" class="comm-btn c-btn-8 table-cell">All Courses > </a>
+
+            <section class="tal table" style="position: absolute;transform: translate(5px,25px)">
+
+              <span  style="margin-left: 16px!important;
+                            font-size: 1.75rem;
+                            line-height: 2.25rem;
+                            font-family: Source Sans Pro,Arial,sans-serif;
+                            font-weight: 600;
+                            letter-spacing: -.1px;">Popular Courses</span>
           </section>
+
           </header>
           <div>
             <article class="comm-course-list">
               <ul class="of" id="bna">
                 <li v-for="item in eduList" :key="item.id">
-                  <div class="cc-l-wrap">
-                    <section class="course-img">
-                       <img
-                        :src="item.cover"
-                        class="img-responsive"
-                        alt="item.title"
-                        width="500"
-                        height="320"
-                      >
-                      <div class="cc-mask">
-                        <a title="开始学习" class="comm-btn c-btn-1" v-on:click="isLogin(item.id)">Start Learning</a>
-                      </div>
-                    </section>
+<!--
+"item.cover" 图片的路径
+item.id
+v-on:click="isLogin(item.id) 用于判断是否登录并且实现自动转跳
+Number(item.price)
+item.buyCount
+item.viewCount
+-->
+                    <class_lable_veritical_white v-bind:cover="item.cover" v-bind:title="item.title" v-bind:price="item.price" v-bind:buycount="item.buyCount" v-bind:viewcount="item.viewCount"
 
-                    <h3 class="hLh30 txtOf mt10">
-                      <a :title="item.title" class="course-title fsize18 c-333" v-on:click="isLogin(item.id)">{{item.title}}</a>
-                    </h3>
+                                                 v-on:islogin="isLogin(item.id)" >
 
-                     <section class="mt10 hLh20 of">
-                      <span class="fr jgTag bg-green" v-if="Number(item.price) === 0">
-                        <i class="c-fff fsize12 f-fA">Free</i>
-                      </span>
-                      <span class="fr jgTag bg-orange" v-else>
-                         <i class="c-fff fsize12 f-fA"> ￥{{ item.price }}</i>
-                       </span>
-                      <span class="fl jgAttr c-ccc f-fA">
-                         <i class="c-999 f-fA">{{ item.buyCount }} Brought</i>
-                         <i class="c-999 f-fA">{{ item.viewCount }} Viewed</i>
-                      </span>
-                    </section>
-                  </div>
+                    </class_lable_veritical_white>
+
+
                 </li>
 
               </ul>
@@ -148,6 +81,8 @@
         </section>
       </div>
       <!-- /在线教育网课程 结束 -->
+
+
     <!-- 在线教育网名师 开始 -->
       <div>
         <section class="container">
@@ -195,8 +130,16 @@
 import cookie from 'js-cookie'
 import banner from '@/api/banner'
 import index from '@/api/index'
-
+import class_lable_horizotal from "@/components/class_lable_horizotal";
+import class_lable_veritical from "@/components/lable/class_lable_veritical";
+import Class_lable_veritical_white from "@/components/lable/class_label_vertical_white";
 export default {
+  components: {
+    Class_lable_veritical_white,
+    class_lable_horizotal,
+    class_lable_veritical
+
+  },
   data() {
     return {
 
@@ -232,6 +175,7 @@ export default {
     },
         //判断是否登录
       isLogin(to){
+
       if(this.isNotNull(cookie.get('guli_token'))){
         console.log(cookie.get('guli_token'))
         window.location.href="/course/"+to
@@ -252,6 +196,7 @@ export default {
       index.getIndexData()
            .then(response => {
              this.eduList = response.data.data.eduList
+             console.log(this.eduList)
              this.teacherList = response.data.data.teacherList
            })
     }
