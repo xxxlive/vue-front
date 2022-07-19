@@ -24,22 +24,10 @@
           <article v-if="data.total>0" class="i-teacher-list">
             <ul class="of">
               <li v-for="item in data.items" :key="item.id">
-                <section class="i-teach-wrap">
-                  <div class="i-teach-pic">
-                    <a :href="'/teacher/'+item.id" :title="item.name" target="_blank">
-                      <img :src="item.avatar" :alt="item.name">
-                    </a>
-                  </div>
-                  <div class="mt10 hLh30 txtOf tac">
-                    <a :href="'/teacher/'+item.id" :title="item.name" target="_blank" class="fsize18 c-666">{{item.name}}</a>
-                  </div>
-                  <div class="hLh30 txtOf tac">
-                    <span class="fsize14 c-999">{{item.intro}}</span>
-                  </div>
-                  <div class="mt15 i-q-txt">
-                    <p class="c-999 f-fA">{{item.career}}</p>
-                  </div>
-                </section>
+
+                <class_lable_veritical v-bind:avater="item.avatar" v-bind:name="item.name" v-bind:career="item.career" v-bind:intro="item.intro" v-bind:id="item.id"
+                ></class_lable_veritical>
+
               </li>
             </ul>
             <div class="clear"></div>
@@ -87,8 +75,11 @@
 </template>
 <script>
 import teacherApi from '@/api/teacher'
-
+import class_lable_veritical from "~/components/lable/class_lable_veritical";
 export default {
+  components:{
+    class_lable_veritical
+  },
   //异步操作 发送请求才会调用 只会调一次
   //params 相当于 this.$route.params
   asyncData({params,error}) {

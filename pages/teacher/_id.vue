@@ -55,17 +55,14 @@
           <article class="comm-course-list" v-if="courseList.length != 0">
             <ul class="of">
               <li v-for="item in courseList" :key="item.id">
-                <div class="cc-l-wrap">
-                  <section class="course-img">
-                    <img :src="item.cover" class="img-responsive" >
-                    <div class="cc-mask">
-                      <a :title="item.title" target="_blank" class="comm-btn c-btn-1" v-on:click="isLogin(item.id)">{{item.title}}</a>
-                    </div>
-                  </section>
-                  <h3 class="hLh30 txtOf mt10">
-                    <a :title="item.title" target="_blank" class="course-title fsize18 c-333" v-on:click="isLogin(item.id)">{{item.title}}</a>
-                  </h3>
-                </div>
+
+                <class_lable_veritical_white v-bind:cover="item.cover" v-bind:title="item.title" v-bind:price="item.price" v-bind:buycount="item.buyCount" v-bind:viewcount="item.viewCount"
+
+                                             v-on:islogin="isLogin(item.id)" >
+
+                </class_lable_veritical_white>
+
+
               </li>
             </ul>
             <div class="clear"></div>
@@ -79,7 +76,14 @@
 <script>
 import teacherApi from '@/api/teacher'
 import cookie from 'js-cookie'
+import Class_lable_veritical_white from "@/components/lable/class_label_vertical_white";
+
+
 export default {
+
+  components: {
+    Class_lable_veritical_white,
+  },
    //params 相当于 this.$route.params
   asyncData({params,error}) {
     return teacherApi.getTeacherInfo(params.id)

@@ -76,33 +76,15 @@
           <article class="comm-course-list" v-if="data.total > 0">
             <ul class="of" id="bna">
               <li v-for="item in data.items" :key="item.id">
-                <div class="cc-l-wrap">
-                  <section class="course-img">
-                    <img :src="item.cover" class="img-responsive" :alt="item.title">
-                    <div class="cc-mask">
-                      <a :title="item.title" class="comm-btn c-btn-1" v-on:click="isLogin(item.id)">Start Learning</a>
-                    </div>
-                  </section>
-                  <h3 class="hLh30 txtOf mt10">
-                    <a :href="'/course/'+item.id" :title="item.title" class="course-title fsize18 c-333" v-on:click="isLogin(item.id)">{{item.title}}</a>
-                  </h3>
-                  <section class="mt10 hLh20 of">
-                    <span v-if="isNotNull(item.zipData)" class="fr jgTag bg-green">
-                        <a :href="item.zipData" target="_blank">
-                            <i class="c-fff fsize12 f-fA">Downloads</i>
-                        </a>
-                    </span>
-                    <span v-if="!isNotNull(item.zipData)" class="fr jgTag bg-green">
-                      <i class="c-fff fsize12 f-fA">Haven't upload yet</i>
-                    </span>
 
-                    <span class="fl jgAttr c-ccc f-fA">
-                      <i class="c-999 f-fA">{{item.viewCount}}人学习</i>
-                      |
-                      <i class="c-999 f-fA">9634评论</i>
-                    </span>
-                  </section>
-                </div>
+
+                <class_lable_veritical_white v-bind:cover="item.cover" v-bind:title="item.title" v-bind:price="item.price" v-bind:buycount="item.buyCount" v-bind:viewcount="item.viewCount"
+
+                                             v-on:islogin="isLogin(item.id)" >
+
+                </class_lable_veritical_white>
+
+
               </li>
             </ul>
             <div class="clear"></div>
@@ -152,8 +134,18 @@
 <script>
 
 import courseApi from '@/api/course'
+import Class_lable_veritical_white from "@/components/lable/class_label_vertical_white";
+import class_lable_horizotal from "@/components/class_lable_horizotal";
+import class_lable_veritical from "@/components/lable/class_lable_veritical";
+
 import cookie from 'js-cookie'
+
+
 export default {
+  components:{
+    Class_lable_veritical_white
+  },
+
   data() {
     return {
         page:1,
