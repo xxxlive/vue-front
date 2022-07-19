@@ -20,7 +20,7 @@
       <el-carousel height="500px" type="card">
         <el-carousel-item v-for="item in 4" :key="item">
           <div class="video_banner" >
-            <video  autoplay muted loop width="952px">
+            <video  autoplay muted loop width="960px">
               <source type="video/mp4" src="~/assets/video/Mini2_Showreel_S32_Banner_10s_V4_1200x720.mp4">
             </video>
 
@@ -40,19 +40,24 @@
 
       <div style="background-color: #f5f7f8">
         <section class="container" >
-          <header class="comm-title">
 
-            <section class="tal table" style="position: absolute;transform: translate(5px,25px)">
+            <section class="tal table" style="position: relative;transform: translate(20px,45px)">
 
-              <span  style="margin-left: 16px!important;
-                            font-size: 1.75rem;
+              <span  style="margin-top: 80px;
+                            margin-bottom: 10px;;
+                            font-size: xx-large;
                             line-height: 2.25rem;
                             font-family: Source Sans Pro,Arial,sans-serif;
-                            font-weight: 600;
-                            letter-spacing: -.1px;">Popular Courses</span>
+                            font-weight: bolder;
+                            letter-spacing: -.1px;
+                            color: #000000;
+                            z-index: auto;
+">Popular Courses
+              </span>
+
           </section>
 
-          </header>
+
           <div>
             <article class="comm-course-list">
               <ul class="of" id="bna">
@@ -86,34 +91,31 @@ item.viewCount
     <!-- 在线教育网名师 开始 -->
       <div>
         <section class="container">
-          <header class="comm-title">
-            <section class="tal table">
-              <span class="c-333 fsize24 table-cell">Master Lecturer</span>
-              <a href="/teacher" title="全部教师" class="comm-btn c-btn-8 table-cell">All Lecturers > </a>
+
+            <section class="tal table" style="transform: translate(20px,50px)">
+
+              <span  style="margin-top: 80px;
+                            margin-bottom: 10px;;
+                            font-size: xx-large;
+                            line-height: 2.25rem;
+                            font-family: Source Sans Pro,Arial,sans-serif;
+                            font-weight: bolder;
+                            letter-spacing: -.1px;
+                            color: #000000;
+                            z-index: auto;
+                ">Master Lecturer
+              </span>
+
             </section>
-          </header>
+
           <div>
             <article class="i-teacher-list">
               <ul class="of">
                 <li v-for="teacher in teacherList" :key="teacher.id">
-                  <section class="i-teach-wrap">
-                    <div class="i-teach-pic">
-                      <a :href="'/teacher/'+teacher.id" :title="teacher.name">
-                        <img :alt="teacher.name" :src="teacher.avatar">
-                      </a>
-                    </div>
-                    <div class="mt10 hLh30 txtOf tac">
-                      <a :href="'/teacher/'+teacher.id" :title="teacher.name" class="fsize18 c-666">{{teacher.name}}</a>
-                    </div>
-                    <div class="hLh30 txtOf tac">
-                      <span class="fsize14 c-999">{{teacher.career}}</span>
-                    </div>
-                    <div class="mt15 i-q-txt">
-                      <p
-                        class="c-999 f-fA"
-                      >{{teacher.intro}}</p>
-                    </div>
-                  </section>
+
+                  <class_lable_veritical v-bind:avater="teacher.avatar" v-bind:name="teacher.name" v-bind:career="teacher.career" v-bind:intro="teacher.intro" v-bind:id="teacher.id"
+                   ></class_lable_veritical>
+
                 </li>
               </ul>
               <div class="clear"></div>
@@ -169,6 +171,8 @@ export default {
     this.getIndexData()
   },
   methods: {
+
+
     //判断是否null
     isNotNull(data){
     return (!(data === "" || data === undefined || data == null));
