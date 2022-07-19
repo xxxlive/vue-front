@@ -9,7 +9,7 @@
           </a>
         </h1>
         <div class="h-r-nsl">
-          <ul class="nav">
+          <ul class="nav" >
             <router-link to="/" tag="li" active-class="current" exact>
               <a>Homepage</a>
             </router-link>
@@ -84,7 +84,7 @@
     <!-- /公共头引入 -->
     <nuxt/>
     <!-- 公共底引入 -->
-    <footer id="footer">
+    <footer id="footer" style="border-color: #74a9ef">
       <section class="container">
         <div class>
           <h4 class="hLh30">
@@ -221,6 +221,7 @@ export default {
   }
 }
 </script>
+
 <!-- <style scoped>
 .current_de{
   display: block;
@@ -237,3 +238,6 @@ export default {
 }
 
 </style> -->
+<style>
+
+</style>
