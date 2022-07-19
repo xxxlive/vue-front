@@ -264,7 +264,7 @@ import cookie from 'js-cookie'
 import commentApi from '@/api/comment'
 import Player from 'nplayer'
 import Danmaku from '@nplayer/danmaku'
-import DanmuApi from '@/api/Danmu'
+import DanmuApi from '@/api/danmu'
 /////////////////////////////课程评论相关
 
 const clickoutside = {
