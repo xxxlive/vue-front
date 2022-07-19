@@ -43,16 +43,8 @@
 
             <section class="tal table" style="position: relative;transform: translate(20px,45px)">
 
-              <span  style="margin-top: 80px;
-                            margin-bottom: 10px;;
-                            font-size: xx-large;
-                            line-height: 2.25rem;
-                            font-family: Source Sans Pro,Arial,sans-serif;
-                            font-weight: bolder;
-                            letter-spacing: -.1px;
-                            color: #000000;
-                            z-index: auto;
-">Popular Courses
+              <span  class="important_title">Popular Courses
+
               </span>
 
           </section>
@@ -94,16 +86,7 @@ item.viewCount
 
             <section class="tal table" style="transform: translate(20px,50px)">
 
-              <span  style="margin-top: 80px;
-                            margin-bottom: 10px;;
-                            font-size: xx-large;
-                            line-height: 2.25rem;
-                            font-family: Source Sans Pro,Arial,sans-serif;
-                            font-weight: bolder;
-                            letter-spacing: -.1px;
-                            color: #000000;
-                            z-index: auto;
-                ">Master Lecturer
+              <span  class="important_title">Master Lecturer
               </span>
 
             </section>
@@ -218,27 +201,18 @@ export default {
   margin: 0;
 }
 
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
+.important_title{
+  margin-top: 80px;
+  margin-bottom: 10px;;
+  font-size: xx-large;
+  line-height: 2.25rem;
+  font-family: Source Sans Pro,Arial,sans-serif;
+  font-weight: bolder;
+  letter-spacing: -.1px;
+  color: #000000;
+  z-index: auto;
 }
 
-.el-carousel__item:nth-child(2n+1) {
-  background-color: #d3dce6;
-}
-
-section_test{
-  position: absolute;
-  top : 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  height: 400px;
-  width: 1200px;
-  background: #000000;
-  box-shadow: 0 25px 30px rgba(0,0,0,.5);
-  z-index: 2;
-  display: flex;
-
-}
 
 
 </style>

@@ -5,11 +5,11 @@
     <img v-bind:src="avater" width="268" height="208">
     <div class="test_area">
 
-      <H1 style="font-size: 28px; font-weight: bold;padding-bottom: 20px" >{{name}}</H1>
-      <P style="padding-bottom: 20px;font-size: larger;font-weight: bold">
+      <H1 id="name"  >{{name}}</H1>
+      <P id="career" style="padding-bottom: 20px;font-size: larger;font-weight: 500;font-family:'Microsoft YaHei',serif">
         {{career}}
       </P>
-      <p>
+      <p  id="intro" style="font-family: 'SimSun',serif">
         {{intro}}
       </P>
 
@@ -89,5 +89,13 @@ section:hover{
   transform: translate(28px,160px);
   line-height: 30px;
   z-index: 2;
+}
+
+#name{
+  font-size: 28px;
+  font-weight: 700;
+  padding-bottom: 20px;
+  font-family: 'SimSun',
+  serif
 }
 </style>
