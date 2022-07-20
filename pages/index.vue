@@ -2,25 +2,25 @@
   <div>
 
     <!-- 幻灯片 开始 -->
-<!--    <div v-swiper:mySwiper="swiperOption">-->
-<!--      <div class="swiper-wrapper">-->
-<!--        <div class="swiper-slide" v-for="item in bannerList" :key="item.id" style="background: #040B1B;">-->
-<!--            <a target="_blank" :href="item.linkUrl">-->
-<!--                <img :src="item.imageUrl" :alt="item.title">-->
-<!--           </a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--   <div class="swiper-pagination swiper-pagination-white"></div>-->
-<!--    <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>-->
-<!--    <div class="swiper-button-next swiper-button-white" slot="button-next"></div>-->
-<!--</div>-->
+    <!--    <div v-swiper:mySwiper="swiperOption">-->
+    <!--      <div class="swiper-wrapper">-->
+    <!--        <div class="swiper-slide" v-for="item in bannerList" :key="item.id" style="background: #040B1B;">-->
+    <!--            <a target="_blank" :href="item.linkUrl">-->
+    <!--                <img :src="item.imageUrl" :alt="item.title">-->
+    <!--           </a>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--   <div class="swiper-pagination swiper-pagination-white"></div>-->
+    <!--    <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>-->
+    <!--    <div class="swiper-button-next swiper-button-white" slot="button-next"></div>-->
+    <!--</div>-->
 
     <!--    尝试进行视频播放-->
     <div class="block">
       <el-carousel height="500px" type="card">
         <el-carousel-item v-for="item in 4" :key="item">
-          <div class="video_banner" >
-            <video  autoplay muted loop width="960px">
+          <div class="video_banner">
+            <video autoplay muted loop width="960px">
               <source type="video/mp4" src="~/assets/video/Mini2_Showreel_S32_Banner_10s_V4_1200x720.mp4">
             </video>
 
@@ -30,20 +30,46 @@
     </div>
 
 
-
-
     <!-- 幻灯片 结束 -->
-     <div id="aCoursesList">
+
+    <div id="upcoming-events" style="background-color: #f5f7f8">
+      <section class="container">
+        <section class="tal table" style="position: relative;transform: translate(20px,45px)">
+          <span class="important_title">Upcoming Events</span>
+        </section>
+      </section>
+
+      <div>
+        <el-scrollbar style="height: 100%; position: relative;transform: translate(20px, 45px);">
+          <el-row :gutter="40" class="centered">
+            <el-col :span="5" v-for="(o, index) in events" :key="o" :offset="index === 0 ? 1 : 0">
+              <el-card :body-style="{ padding: '0px' }" shadow="hover">
+                <img class="image" v-bind:src="o.src" v-bind:alt="o.title"
+                     style="aspect-ratio: 16/9; height: 180px; object-fit: cover; object-position: center">
+                <div style="padding: 10px;">
+                  <span style="font-weight: bold; font-size: large">{{ o.title }}</span>
+                  <div class="bottom clearfix">
+                    <time class="time">{{ o.date }}</time>
+                  </div>
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
+        </el-scrollbar>
+      </div>
+    </div>
+
+
+    <div id="aCoursesList">
       <!-- 在线教育网课程 开始 -->
 
 
-
       <div style="background-color: #f5f7f8">
-        <section class="container" >
+        <section class="container">
 
-            <section class="tal table" style="position: relative;transform: translate(20px,45px)">
+          <section class="tal table" style="position: relative;transform: translate(20px,45px)">
 
-              <span  class="important_title">Popular Courses
+              <span class="important_title">Popular Courses
 
               </span>
 
@@ -54,19 +80,21 @@
             <article class="comm-course-list">
               <ul class="of" id="bna">
                 <li v-for="item in eduList" :key="item.id">
-<!--
-"item.cover" 图片的路径
-item.id
-v-on:click="isLogin(item.id) 用于判断是否登录并且实现自动转跳
-Number(item.price)
-item.buyCount
-item.viewCount
--->
-                    <class_lable_veritical_white v-bind:cover="item.cover" v-bind:title="item.title" v-bind:price="item.price" v-bind:buycount="item.buyCount" v-bind:viewcount="item.viewCount"
+                  <!--
+                  "item.cover" 图片的路径
+                  item.id
+                  v-on:click="isLogin(item.id) 用于判断是否登录并且实现自动转跳
+                  Number(item.price)
+                  item.buyCount
+                  item.viewCount
+                  -->
+                  <class_lable_veritical_white v-bind:cover="item.cover" v-bind:title="item.title"
+                                               v-bind:price="item.price" v-bind:buycount="item.buyCount"
+                                               v-bind:viewcount="item.viewCount"
 
-                                                 v-on:islogin="isLogin(item.id)" >
+                                               v-on:islogin="isLogin(item.id)">
 
-                    </class_lable_veritical_white>
+                  </class_lable_veritical_white>
 
 
                 </li>
@@ -80,24 +108,26 @@ item.viewCount
       <!-- /在线教育网课程 结束 -->
 
 
-    <!-- 在线教育网名师 开始 -->
+      <!-- 在线教育网名师 开始 -->
       <div>
         <section class="container">
 
-            <section class="tal table" style="transform: translate(20px,50px)">
+          <section class="tal table" style="transform: translate(20px,50px)">
 
-              <span  class="important_title">Master Lecturer
+              <span class="important_title">Master Lecturer
               </span>
 
-            </section>
+          </section>
 
           <div>
             <article class="i-teacher-list">
               <ul class="of">
                 <li v-for="teacher in teacherList" :key="teacher.id">
 
-                  <class_lable_veritical v-bind:avater="teacher.avatar" v-bind:name="teacher.name" v-bind:career="teacher.career" v-bind:intro="teacher.intro" v-bind:id="teacher.id"
-                   ></class_lable_veritical>
+                  <class_lable_veritical v-bind:avater="teacher.avatar" v-bind:name="teacher.name"
+                                         v-bind:career="teacher.career" v-bind:intro="teacher.intro"
+                                         v-bind:id="teacher.id"
+                  ></class_lable_veritical>
 
                 </li>
               </ul>
@@ -108,7 +138,7 @@ item.viewCount
         </section>
       </div>
       <!-- /在线教育网名师 结束 -->
-   </div>
+    </div>
   </div>
 </template>
 <script>
@@ -118,6 +148,7 @@ import index from '@/api/index'
 import class_lable_horizotal from "@/components/class_lable_horizotal";
 import class_lable_veritical from "@/components/lable/class_lable_veritical";
 import Class_lable_veritical_white from "@/components/lable/class_label_vertical_white";
+
 export default {
   components: {
     Class_lable_veritical_white,
@@ -127,13 +158,41 @@ export default {
   },
   data() {
     return {
+      events: [
+        {
+          src: 'https://empic.dfcfw.com/742596400923164673/w900h600/art',
+          title: '华为分享会',
+          date: '7/22/2022'
+        },
+        {
+          src: 'http://p8.itc.cn/images01/20200909/38a38485365e4bcbafc483518e029dc2.jpeg',
+          title: '鸿蒙系统分享会',
+          date: '7/23/2022'
+        }, {
+          src: 'https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2021%2F1101%2F76b61c95j00r1vz1n0011c000ms007lg.jpg&thumbnail=660x2147483647&quality=80&type=jpg',
+          title: '华为服务分享会',
+          date: '7/24/2022'
+        }, {
+          src: 'http://pic.uzzf.com/up/2021-7/16268388929285582.jpg',
+          title: '鸿蒙系统开发公开课',
+          date: '7/25/2022'
+        }, {
+          src: 'https://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190225/77bce51d15de4a7191079825020c22cf.jpeg',
+          title: '华为谈5G',
+          date: '7/26/2022'
+        }, {
+          src: 'https://p9.itc.cn/images01/20210523/a12f02c5ad864c0185d8c8ef848f2a6e.png',
+          title: '华为手机展望',
+          date: '7/27/2022'
+        }, {
+          src: 'https://pica.zhimg.com/v2-1ea8583b536e7dfa60e9797d72e4b95b_1440w.jpg?source=172ae18b',
+          title: '华为谈营销',
+          date: '7/28/2022'
+        },
+      ],
 
 
       swiperOption: {
-        autoplay: true,
-        autoplay: {
-          disableOnInteraction: false
-        },
         //配置分页
         pagination: {
           el: '.swiper-pagination'//分页的dom节点
@@ -157,18 +216,17 @@ export default {
 
 
     //判断是否null
-    isNotNull(data){
-    return (!(data === "" || data === undefined || data == null));
+    isNotNull(data) {
+      return (!(data === "" || data === undefined || data == null));
     },
-        //判断是否登录
-      isLogin(to){
+    //判断是否登录
+    isLogin(to) {
 
-      if(this.isNotNull(cookie.get('guli_token'))){
+      if (this.isNotNull(cookie.get('guli_token'))) {
         console.log(cookie.get('guli_token'))
-        window.location.href="/course/"+to
-      }
-      else{
-        window.location.href="/login"
+        window.location.href = "/course/" + to
+      } else {
+        window.location.href = "/login"
       }
     },
     //查询banner数据
@@ -181,11 +239,11 @@ export default {
     //查询热门课程和名师
     getIndexData() {
       index.getIndexData()
-           .then(response => {
-             this.eduList = response.data.data.eduList
-             console.log(this.eduList)
-             this.teacherList = response.data.data.teacherList
-           })
+        .then(response => {
+          this.eduList = response.data.data.eduList
+          console.log(this.eduList)
+          this.teacherList = response.data.data.teacherList
+        })
     }
   }
 }
@@ -201,18 +259,15 @@ export default {
   margin: 0;
 }
 
-.important_title{
+.important_title {
   margin-top: 80px;
   margin-bottom: 10px;;
   font-size: xx-large;
   line-height: 2.25rem;
-  font-family: Source Sans Pro,Arial,sans-serif;
+  font-family: Source Sans Pro, Arial, sans-serif;
   font-weight: bolder;
   letter-spacing: -.1px;
   color: #000000;
   z-index: auto;
 }
-
-
-
 </style>
