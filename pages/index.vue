@@ -17,11 +17,16 @@
 
     <!--    尝试进行视频播放-->
     <div class="block">
-      <el-carousel height="500px" type="card">
-        <el-carousel-item v-for="item in 4" :key="item">
+      <el-carousel height="600px" type="card" v-on:change="vifeo_banner_change">
+
+        <P id="video_banner_title">{{video_banner_name_now}}
+        </P>
+
+        <el-carousel-item v-for="item in video_list" :key="item.src">
           <div class="video_banner">
+
             <video autoplay muted loop width="960px">
-              <source type="video/mp4" src="~/assets/video/Mini2_Showreel_S32_Banner_10s_V4_1200x720.mp4">
+              <source v-bind:data-layzr-src="item.src" type="video/mp4" v-bind:src="item.src">
             </video>
 
           </div>
@@ -91,7 +96,6 @@
                   <class_lable_veritical_white v-bind:cover="item.cover" v-bind:title="item.title"
                                                v-bind:price="item.price" v-bind:buycount="item.buyCount"
                                                v-bind:viewcount="item.viewCount"
-
                                                v-on:islogin="isLogin(item.id)">
 
                   </class_lable_veritical_white>
@@ -150,6 +154,8 @@ import class_lable_veritical from "@/components/lable/class_lable_veritical";
 import Class_lable_veritical_white from "@/components/lable/class_label_vertical_white";
 
 export default {
+
+
   components: {
     Class_lable_veritical_white,
     class_lable_horizotal,
@@ -157,7 +163,35 @@ export default {
 
   },
   data() {
+
+
     return {
+
+      video_banner_name_now : "Discover",
+
+      video_list:[
+
+        {src: "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/Shot%20on%20Banner/Mavic3_webclip_08.mp4",
+         name:"Discover"
+        },
+        {
+          src: "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/mini2-skypixel-banner/Mini2_Showreel_S32_Banner_10s_V4_1200x720.mp4",
+          name:"Go On"
+        },
+
+        {
+          src : "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/M3P%20shot%20on/WM162_%E5%AE%98%E7%BD%91%E9%A6%96%E9%A1%B5ShotOn_MASTER_1200x720_20220509.mp4",
+          name : "Learn EveryThing"
+        },
+
+        {
+          src: "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/170-ar/0416.mp4",
+          name : "Reach Your Dream"
+        }
+
+
+      ],
+
       events: [
         {
           src: 'https://empic.dfcfw.com/742596400923164673/w900h600/art',
@@ -214,6 +248,18 @@ export default {
   },
   methods: {
 
+    vifeo_banner_change(inedx_now,index_preview){
+      console.log(this.video_list.at(inedx_now).name)
+      console.log(index_preview)
+      this.video_banner_name_now=this.video_list.at(inedx_now).name
+    },
+
+    get_video_banner_name(item){
+
+      this.video_banner_name_now=iteme.name;
+
+    },
+
 
     //判断是否null
     isNotNull(data) {
@@ -245,6 +291,12 @@ export default {
           this.teacherList = response.data.data.teacherList
         })
     }
+  },
+  mounted() {
+
+    let vide_title=document.getElementById("video_banner_title")
+    vide_title.style.setProperty("width",window.screen.width+"px")
+    console.log("gaga"+window.screen.width+"px")
   }
 }
 </script>
@@ -269,5 +321,22 @@ export default {
   letter-spacing: -.1px;
   color: #000000;
   z-index: auto;
+}
+
+#video_banner_title{
+
+  position: absolute;
+  font-size: 36px;
+  transform: translate(0,80px);
+  font-weight: bold;
+  line-height: 24px;
+  color: white;
+  opacity: 0.75;
+  text-align: center;
+  word-wrap: break-word;
+  box-sizing: inherit;
+  font-family: "Open Sans","PingFang SC","Microsoft YaHei","Helvetica Neue","Hiragino Sans GB","WenQuanYi Micro Hei",Arial,sans-serif;
+  z-index: 3;
+  transition-duration: 0.4s;
 }
 </style>
