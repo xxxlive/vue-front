@@ -172,7 +172,7 @@ export default {
       video_list:[
 
         {src: "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/Shot%20on%20Banner/Mavic3_webclip_08.mp4",
-         name:"Discover"
+         name:"Discover The World"
         },
         {
           src: "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/mini2-skypixel-banner/Mini2_Showreel_S32_Banner_10s_V4_1200x720.mp4",
