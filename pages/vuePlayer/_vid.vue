@@ -17,7 +17,7 @@
 
       <!--      />-->
     </template>
-    <el-button @click="logNplayer">this is a button</el-button>
+<!--    <el-button @click="logNplayer">this is a button</el-button>-->
     <template>
       <div id="aCoursesList" class="bg-fa of">
 
@@ -689,13 +689,18 @@ export default {
       DanmuApi.GetDanmuByID(this.options.vid)
       .then(response =>{
         console.log(response)
+        console.log("哈哈")
         let data = response.data.data.danmuArray;
-        console.log(data)
-        data = data.sort((a, b) => a.time - b.time)
+        // console.log(data)
+        // data = data.sort((a, b) => a.time - b.time)
         this.danmaku = new Danmaku({items:data})
         var nplayer = new Player({
           src:this.source,
-          plugins: [this.danmaku]
+          plugins: [this.danmaku],
+          controls:  [
+            ['play', 'volume', 'time', 'spacer', 'airplay', 'settings', 'web-fullscreen', 'fullscreen'],
+            ['progress']
+          ]
         })
 
         //监听"发送弹幕事件"
@@ -705,7 +710,7 @@ export default {
           this.SendDanmuToBackend(opts);
         })
         let toMountDom = document.getElementById("toMountNPlayer")
-        console.log(toMountDom)
+        console.log(nplayer)
         console.log(123)
         nplayer.mount(toMountDom)
       })

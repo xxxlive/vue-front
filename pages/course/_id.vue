@@ -201,11 +201,12 @@
                                     }}</el-button>
                                   </span>
                                   <span>
-                                    <el-button
-                                      size="medium"
-                                      v-if="isNotNull(video.videoSourceUrl)"
-                                      type="primary"
-                                      @click="
+                                    <div  >
+                                      <el-button
+                                        size="medium"
+                                        v-if="isNotNull(video.videoSourceUrl) &&(isbuy || Number(courseWebVo.price) === 0)"
+                                        type="primary"
+                                        @click="
                                         openPlayerPage(
                                           video.videoSourceId,
                                           video.videoSourceUrl
@@ -213,7 +214,9 @@
                                       "
                                       ><i class="el-icon-video-play"></i
                                       >Video</el-button
-                                    >
+                                      >
+                                    </div>
+
                                     <el-button
                                       size="medium"
                                       v-if="!isNotNull(video.videoSourceUrl)"

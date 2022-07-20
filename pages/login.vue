@@ -63,14 +63,14 @@ export default {
               .then(response => {
                 //2.将token字符串放到cookie里
                            //key         value                    作用范围
-                 cookie.set('guli_token',response.data.data.token,{domain: '47.95.195.219'})
+                 cookie.set('guli_token',response.data.data.token,{domain: 'localhost'})
                  //console.log('guli_token:'+cookie.get(guli_token))
                 //4.调用接口,根据token获取用户信息
                 loginApi.getLoginUserInfo()
                         .then(response => {
                            this.loginInfo = response.data.data.userInfo
                            //获取返回用户信息，放到cookie里面
-                           cookie.set('guli_ucenter',this.loginInfo,{domain: '47.95.195.219'})
+                           cookie.set('guli_ucenter',this.loginInfo,{domain: 'localhost'})
                            //console.log('guli_ucenter:'+cookie.get(guli_ucenter))
                            //跳转页面
                            window.location.href="/"
