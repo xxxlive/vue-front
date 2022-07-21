@@ -22,11 +22,11 @@
         <P id="video_banner_title">{{video_banner_name_now}}
         </P>
 
-        <el-carousel-item v-for="item in video_list" :key="item.src">
+        <el-carousel-item v-for="item in bannerList" :key="item.imageUrl">
           <div class="video_banner">
 
             <video autoplay muted loop width="960px">
-              <source v-bind:data-layzr-src="item.src" type="video/mp4" v-bind:src="item.src">
+              <source v-bind:data-layzr-src="item.imageUrl" type="video/mp4" v-bind:src="item.imageUrl">
             </video>
 
           </div>
@@ -47,7 +47,7 @@
       <div>
         <el-scrollbar style="height: 100%; position: relative;transform: translate(20px, 45px);">
           <el-row :gutter="40" class="centered">
-            <el-col :span="5" v-for="(o, index) in events" :key="o" :offset="index === 0 ? 1 : 0">
+            <el-col :span="5" v-for="o in events" :key="o" :offset="0">
               <el-card :body-style="{ padding: '0px' }" shadow="hover">
                 <img class="image" v-bind:src="o.src" v-bind:alt="o.title"
                      style="aspect-ratio: 16/9; height: 180px; object-fit: cover; object-position: center">
@@ -159,36 +159,36 @@ export default {
   components: {
     Class_lable_veritical_white,
     class_lable_horizotal,
-    class_lable_veritical
-
+    class_lable_veritical,
   },
   data() {
 
 
     return {
 
-      video_banner_name_now : "Go On",
+      video_banner_name_now: "Go On",
 
-      video_list:[
+      video_list: [
 
-        
+
         {
           src: "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/mini2-skypixel-banner/Mini2_Showreel_S32_Banner_10s_V4_1200x720.mp4",
-          name:"Go On"
-        },
-
-        {src: "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/Shot%20on%20Banner/Mavic3_webclip_08.mp4",
-          name:"Discover The World"
+          name: "Go On"
         },
 
         {
-          src : "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/M3P%20shot%20on/WM162_%E5%AE%98%E7%BD%91%E9%A6%96%E9%A1%B5ShotOn_MASTER_1200x720_20220509.mp4",
-          name : "Learn EveryThing"
+          src: "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/Shot%20on%20Banner/Mavic3_webclip_08.mp4",
+          name: "Discover The World"
+        },
+
+        {
+          src: "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/M3P%20shot%20on/WM162_%E5%AE%98%E7%BD%91%E9%A6%96%E9%A1%B5ShotOn_MASTER_1200x720_20220509.mp4",
+          name: "Learn EveryThing"
         },
 
         {
           src: "https://terra-1-g.djicdn.com/851d20f7b9f64838a34cd02351370894/170-ar/0416.mp4",
-          name : "Reach Your Dream"
+          name: "Reach Your Dream"
         }
 
 
@@ -250,15 +250,15 @@ export default {
   },
   methods: {
 
-    vifeo_banner_change(inedx_now,index_preview){
-      console.log(this.video_list.at(inedx_now).name)
+    vifeo_banner_change(inedx_now, index_preview) {
+      console.log(this.bannerList.at(inedx_now).title)
       console.log(index_preview)
-      this.video_banner_name_now=this.video_list.at(inedx_now).name
+      this.video_banner_name_now = this.bannerList.at(inedx_now).title
     },
 
-    get_video_banner_name(item){
+    get_video_banner_name(item) {
 
-      this.video_banner_name_now=iteme.name;
+      this.video_banner_name_now = iteme.name;
 
     },
 
@@ -282,6 +282,7 @@ export default {
       banner.getListBanner()
         .then(response => {
           this.bannerList = response.data.data.list
+          console.log(this.bannerList)
         })
     },
     //查询热门课程和名师
@@ -325,11 +326,11 @@ export default {
   z-index: auto;
 }
 
-#video_banner_title{
+#video_banner_title {
 
   position: absolute;
   font-size: 36px;
-  transform: translate(0,80px);
+  transform: translate(0, 80px);
   font-weight: bold;
   line-height: 24px;
   color: white;
@@ -337,7 +338,7 @@ export default {
   text-align: center;
   word-wrap: break-word;
   box-sizing: inherit;
-  font-family: "Open Sans","PingFang SC","Microsoft YaHei","Helvetica Neue","Hiragino Sans GB","WenQuanYi Micro Hei",Arial,sans-serif;
+  font-family: "Open Sans", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", "Hiragino Sans GB", "WenQuanYi Micro Hei", Arial, sans-serif;
   z-index: 3;
   transition-duration: 0.4s;
 }
