@@ -58,7 +58,7 @@
               </template>
 
             </el-table-column
->
+            >
             <el-table-column
               prop="title"
               label="title"
@@ -72,16 +72,7 @@
               prop="price"
               label="Price">
             </el-table-column>
-            <el-table-column
-              label="Cancel Star">
-              <template slot-scope="scope">
-            <span>
-                <el-button type="danger" icon="el-icon-delete" circle @click="unstar(scope.row.id)"></el-button>
 
-            </span>
-              </template>
-
-            </el-table-column>
           </el-table>
         </el-main>
       </el-container>
@@ -137,7 +128,7 @@ export default {
         .then(response => {
             let memberID = response.data.data.userInfo.id;
             console.log(memberID)
-            courseApi.queryStarList(memberID)
+            courseApi.getRecoListByUid(memberID)
               .then(response => {
                   console.log(response)
                   this.tabledata = response.data.data.starList;
@@ -152,26 +143,26 @@ export default {
       console.log(id);
       //传给后端取消star
       loginApi.getLoginUserInfo().then(response => {
-        let memberID = response.data.data.userInfo.id;
-        courseApi
-          .unstarOneCourse(memberID, id)
-          .then(response => {
-              // console.log(response)
-            //成功unstar该课程后应该在界面中删除
-            if(response.data.data.result===true){
-              // console.log("chengongshanchu !!!")
-              let i = 0;
-              // console.log(this.tabledata)
-              for(i=0;i<this.tabledata.length;i++){
-                if(id == this.tabledata[i].id){
-                  this.tabledata = this.tabledata.slice(0,i).concat(this.tabledata.slice(i+1) );
+          let memberID = response.data.data.userInfo.id;
+          courseApi
+            .unstarOneCourse(memberID, id)
+            .then(response => {
+                // console.log(response)
+                //成功unstar该课程后应该在界面中删除
+                if(response.data.data.result===true){
+                  // console.log("chengongshanchu !!!")
+                  let i = 0;
                   // console.log(this.tabledata)
+                  for(i=0;i<this.tabledata.length;i++){
+                    if(id == this.tabledata[i].id){
+                      this.tabledata = this.tabledata.slice(0,i).concat(this.tabledata.slice(i+1) );
+                      // console.log(this.tabledata)
+                    }
+                  }
                 }
               }
-            }
-            }
-          );
-      }
+            );
+        }
       )
 
     }
