@@ -64,4 +64,12 @@ export default {
     })
   },
 
+  //根据用户id查询后端推荐的课程
+  getRecoListByUid(memberid) {
+    return request({
+      url: `/eduservice/star/getRecoListByUid/${memberid}`,
+      method: 'get',
+    })
+  },
+
 }
