@@ -4,7 +4,7 @@
     <header id="header">
       <section class="container">
         <h1 id="logo">
-         <a href="/" title="在线教育学院">
+         <a href="/" title="">
             <img src="~/assets/img/logo.png" width="100%" alt="在线教育学院">
           </a>
         </h1>

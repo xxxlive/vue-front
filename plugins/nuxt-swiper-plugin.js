@@ -6,9 +6,11 @@ import 'element-ui/lib/theme-chalk/index.css'//element-ui的css
 import VueAliplayerV2 from 'vue-aliplayer-v2'
 import cookie from '/utils/cookie.js'
 import NPlayer from "@nplayer/vue";
+import live2d from "vue-live2d";
 Vue.use(VueAliplayerV2)
 Vue.use(ElementUI) //使用elementUI
 Vue.use(VueQriously)
 Vue.use(VueAwesomeSwiper)
 Vue.use(NPlayer, { name: 'NPlayer' })
+Vue.use(live2d)
 Vue.prototype.cookie=cookie

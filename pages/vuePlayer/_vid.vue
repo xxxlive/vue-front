@@ -692,7 +692,7 @@ export default {
         console.log("哈哈")
         let data = response.data.data.danmuArray;
         // console.log(data)
-        // data = data.sort((a, b) => a.time - b.time)
+        data = data.sort((a, b) => a.time - b.time)
         this.danmaku = new Danmaku({items:data})
         var nplayer = new Player({
           src:this.source,

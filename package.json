@@ -28,6 +28,7 @@
     "stylus-loader": "^3.0.2",
     "vue-aliplayer-v2": "^1.3.0",
     "vue-awesome-swiper": "^3.1.3",
+    "vue-live2d": "^1.3.1",
     "vue-qriously": "^1.1.1"
   },
   "devDependencies": {

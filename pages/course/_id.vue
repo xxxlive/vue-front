@@ -21,6 +21,7 @@
             />
           </section>
         </article>
+<!--购买界面，但是不包括那个红色的条子-->
         <aside class="c-attr-wrap">
           <section class="ml20 mr15">
             <h2 class="hLh30 txtOf mt15">
@@ -38,6 +39,7 @@
                 {{ courseWebVo.teacherName }}&nbsp;&nbsp;&nbsp;</span
               >
             </section>
+
             <section class="c-attr-mt of">
               <span class="ml10 vam">
                 <em id="tochange" class="icon18 scIcon"></em>
@@ -63,6 +65,7 @@
                 </template>
               </span>
             </section>
+
             <section
               v-if="isbuy || Number(courseWebVo.price) === 0"
               class="c-attr-mt"
@@ -82,6 +85,8 @@
             </section>
           </section>
         </aside>
+
+<!--该死的红色条子-->
         <aside class="thr-attr-box">
           <ol class="thr-attr-ol clearfix">
             <li>
@@ -112,6 +117,7 @@
             </li>
           </ol>
         </aside>
+
         <div class="clear"></div>
       </div>
       <!-- /课程封面介绍 -->
